@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 4.50 (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="0" name="Kaiser"/>
+  </section>
+  <section name="data">
+    <explorer view="includes\" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2010-07-24 15:07" user="Thomas" host="THOMAS-PC"/>
+  </section>
+  <section name="files">
+    <file name="kaiser.pb">
+      <config load="1" scan="1" panel="1" warn="1" lastopen="1"/>
+      <fingerprint md5="51fad38b10f71b8e0ceb928c8a45500f"/>
+    </file>
+    <file name="Make_Data_Pack.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="663c72c455bc7c3c41f59c4a07459a78"/>
+    </file>
+    <file name="Make.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1"/>
+      <fingerprint md5="60db3175eda23a522cc574bc4a9bc2f2"/>
+    </file>
+    <file name="includes\2d.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="9ace8ef5fd03dad48dd0f84a136a7fa3"/>
+    </file>
+    <file name="includes\aktionen.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="bbb9b6ed4bdf7060c4f0da7fb3172143"/>
+    </file>
+    <file name="includes\datasection.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="a5b2aafeb9e1c36cb9b47d611fdf48c6"/>
+    </file>
+    <file name="includes\diplomatie.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="b66bc1644c08bfaa5250d2f39159c2fb"/>
+    </file>
+    <file name="includes\ereignis.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="e2d3c20d534727051f457a3daab7f539"/>
+    </file>
+    <file name="includes\infos.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="9160fdb1b0278413fbc210397eee8427"/>
+    </file>
+    <file name="includes\Init.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="59b269a8b9fc47b49b6c7947c59718b0"/>
+    </file>
+    <file name="includes\jahresende.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="6b6cdc55b38848088e9727bdacf3ba23"/>
+    </file>
+    <file name="includes\Konstanten.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="fdecacf3537311c7bc025714611684d0"/>
+    </file>
+    <file name="includes\krieg.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="352c92b3b214521741f3f9ec75dc6025"/>
+    </file>
+    <file name="includes\neues spiel.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="dcc5c2a15b2039cc942f1d7b22e75d92"/>
+    </file>
+    <file name="includes\System_DefaultStartProgram.pbi">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0"/>
+      <fingerprint md5="7c06825d7c49be3d38d6f984665c93bc"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Standard-Ziel" enabled="1" default="1">
+      <inputfile value="kaiser.pb"/>
+      <outputfile value="Kaiser.exe"/>
+      <options debug="1"/>
+      <icon enable="1">
+        icon.ico
+      </icon>
+      <compilecount enable="1" value="55"/>
+      <buildcount enable="1" value="0"/>
+      <execonstant enable="1"/>
+    </target>
+  </section>
+</project>
