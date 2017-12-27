@@ -5,179 +5,179 @@
 ;##### ------------------------------------------------------------------------
 
 Structure Struktur_Spiel
-anzahl_spieler.b
-jahr.w
-spieler_am_zug.b
-restliches_land.l
-platzhalter.b[92]
+  anzahl_spieler.b
+  jahr.w
+  spieler_am_zug.b
+  restliches_land.l
+  platzhalter.b[92]
 EndStructure
 Structure Struktur_Einheit
-name.s{16}
-angriff.l
-abwehr.l
-treffer_punkte_aktuell.l;sobald wert=0 einheit=tot
-schritte.l
-reichweite.l
-salven.l
-sold.l
-getoetet.l
-erfahrung.l
-titel.l
-spezial.l
-art.l ;1=held 0=normal
-bild.l
-wer_wird_angegriffen.b;welcher spieler
-treffer_punkte_maximal.l
-platzhalter.b[27]
+  name.s{16}
+  angriff.l
+  abwehr.l
+  treffer_punkte_aktuell.l;sobald wert=0 einheit=tot
+  schritte.l
+  reichweite.l
+  salven.l
+  sold.l
+  getoetet.l
+  erfahrung.l
+  titel.l
+  spezial.l
+  art.l ;1=held 0=normal
+  bild.l
+  wer_wird_angegriffen.b;welcher spieler
+  treffer_punkte_maximal.l
+  platzhalter.b[27]
 EndStructure
 Structure Struktur_Kriegsvorderung
-muehlen.l
-maerkte.l
-taler.l
-land.l
-sklaven.l
+  muehlen.l
+  maerkte.l
+  taler.l
+  land.l
+  sklaven.l
 EndStructure
 Structure Struktur_Spieler
-menschlich.b
-name.s{16}
-einwohner.l
-land.l
-taler.l
-korn.l
-geschlecht.b
-ruhm.b
-zufriedenheit.b
-landpreis.b
-kornpreis.b
-salzpreis.w
-bierpreis.w
-weinpreis.w
-waffenpreis.w
-maerkte.w
-muehlen.w
-kornspeicher.w
-lagerhaeuser.w
-schloss.b
-kathedrale.b
-lagerkapatitaet.l
-salz.l
-bier.l
-wein.l
-waffen.l
-steuern.b
-justiz.b
-asyl.b
-platzhalter1.b
-kornspeicherkapazitaet.l
-titel.w
-geburtenrate.w
-sterberate.w
-imigration.w
-emigration.w
-gewinne_mm.l;mühlen + märkte
-handelsbilanz.l
-gewinne_steuer.l
-gewinne_justiz.l
-ausgaben_militaer.l
-gewinne_zinsen.l
-gewinne_lagervermietung.l
-zauber.b
-erster_spielzug.b
-wohnort.b
-schloss_gebaut.b
-kathedrale_gebaut.b
-armeestaerke.l
-kornzuteilung.l
-ki_befoerderungsversuch.b
-platzhalter2.b[64]
-
-;8 Einheiten -> geht nur von 0-7 ka warum
-Einheit.Struktur_Einheit[8]
-
-;DIPLOMATIE
-;hier ein speicherblock von 100 byte
-;10 byte pro gegenspieler
-;keine genaue aufteilung da die speicherverteilung von der aktion abhängt
-Diplomatie.b[100]
-Handelsvertrag.b[10];insgesammt 10 für jeden spieler; 0=nein 1=ja
-Friedensvertrag.w[10]
-Krieg_Gefuehrt.b[10]
-
-platzhalter3.b[60]
-
-Kriegsvorderung.Struktur_Kriegsvorderung[10]
-
-platzhalter4.b[600]
+  menschlich.b
+  name.s{16}
+  einwohner.l
+  land.l
+  taler.l
+  korn.l
+  geschlecht.b
+  ruhm.b
+  zufriedenheit.b
+  landpreis.b
+  kornpreis.b
+  salzpreis.w
+  bierpreis.w
+  weinpreis.w
+  waffenpreis.w
+  maerkte.w
+  muehlen.w
+  kornspeicher.w
+  lagerhaeuser.w
+  schloss.b
+  kathedrale.b
+  lagerkapatitaet.l
+  salz.l
+  bier.l
+  wein.l
+  waffen.l
+  steuern.b
+  justiz.b
+  asyl.b
+  platzhalter1.b
+  kornspeicherkapazitaet.l
+  titel.w
+  geburtenrate.w
+  sterberate.w
+  imigration.w
+  emigration.w
+  gewinne_mm.l;mühlen + märkte
+  handelsbilanz.l
+  gewinne_steuer.l
+  gewinne_justiz.l
+  ausgaben_militaer.l
+  gewinne_zinsen.l
+  gewinne_lagervermietung.l
+  zauber.b
+  erster_spielzug.b
+  wohnort.b
+  schloss_gebaut.b
+  kathedrale_gebaut.b
+  armeestaerke.l
+  kornzuteilung.l
+  ki_befoerderungsversuch.b
+  platzhalter2.b[64]
+  
+  ;8 Einheiten -> geht nur von 0-7 ka warum
+  Einheit.Struktur_Einheit[8]
+  
+  ;DIPLOMATIE
+  ;hier ein speicherblock von 100 byte
+  ;10 byte pro gegenspieler
+  ;keine genaue aufteilung da die speicherverteilung von der aktion abhängt
+  Diplomatie.b[100]
+  Handelsvertrag.b[10];insgesammt 10 für jeden spieler; 0=nein 1=ja
+  Friedensvertrag.w[10]
+  Krieg_Gefuehrt.b[10]
+  
+  platzhalter3.b[60]
+  
+  Kriegsvorderung.Struktur_Kriegsvorderung[10]
+  
+  platzhalter4.b[600]
 EndStructure
 Structure Struktur_Zauber
-zauber.s
-genannt.s
+  zauber.s
+  genannt.s
 EndStructure
 Structure Struktur_Land
-name.s
-krieger.s
-vergeben.b
+  name.s
+  krieger.s
+  vergeben.b
 EndStructure
 Structure Struktur_Vorraussetzung
-einwohner.l
-zufriedenheit.l
-land.l
-taler.l
-armee.l
-palast.l
-kathedrale.l
+  einwohner.l
+  zufriedenheit.l
+  land.l
+  taler.l
+  armee.l
+  palast.l
+  kathedrale.l
 EndStructure
 Structure Ereignisdaten
-
-Titel.s
-Text.s[3]
-Button.s
-Icon.i
-Window_Type.i
-
+  
+  Titel.s
+  Text.s[3]
+  Button.s
+  Icon.i
+  Window_Type.i
+  
 EndStructure
 
 ;wird sobald wie möglich ersetzt
 Structure Krieg_Einheit
-spieler.b
-einheit.b
-angreifer.b
-mem.l
-x.l
-y.l
-schritte.b
+  spieler.b
+  einheit.b
+  angreifer.b
+  mem.l
+  x.l
+  y.l
+  schritte.b
 EndStructure
 Structure Kriegsforderung
-taler.l
-land.l
-sklaven.l
-muehlen.l
-maerkte.l
+  taler.l
+  land.l
+  sklaven.l
+  muehlen.l
+  maerkte.l
 EndStructure
 
 ;Krieg
 Structure AktionOutput
-CPU_Event.l
-Event_Gadget.l
-Schritte_Gesammt.b
-WindowX.l
-WindowY.l
-
+  CPU_Event.l
+  Event_Gadget.l
+  Schritte_Gesammt.b
+  WindowX.l
+  WindowY.l
+  
 EndStructure
 Structure AktionInput
-spieler.l
-einheit.l
+  spieler.l
+  einheit.l
 EndStructure
 #Kaiser$="Kaiser V 0.80"
 #Kaiser_Version=80<<24|10<<16|03<<8|02
 ;               V      YY     MM    TT
 #spieler_size=2000;ergibt sich durch SizeOf(Struktur_Spieler)
-#spiel_size=1000;ergibt sich durch SizeOf(Struktur_Spiel)
+#spiel_size=1000  ;ergibt sich durch SizeOf(Struktur_Spiel)
 
 #TimeOut = 10 ; für waitwindowevent wegen später netzwerk
 
 #img_button=19
-#img_icon=100
+#img_icon=86
 
 Global ActiveGame
 Global NextTurn
@@ -218,7 +218,7 @@ Global Dim namen.s(9)
 Global Dim spieler(9)
 Global Dim Spielerdaten.struktur_spieler(9)
 For x=0 To 9
-spieler(x)=@Spielerdaten(x)
+  spieler(x)=@Spielerdaten(x)
 Next
 
 Global leer = AllocateMemory(#spieler_size)
@@ -324,11 +324,3 @@ Global MainGadget.i
 ;}
 ;}
 
-
-; IDE Options = PureBasic 4.41 RC 1 (Windows - x86)
-; CursorPosition = 171
-; FirstLine = 20
-; Folding = Bw+
-; EnableXP
-; CurrentDirectory = D:\KaiserNewHoermi\bisonte\
-; CompileSourceDirectory

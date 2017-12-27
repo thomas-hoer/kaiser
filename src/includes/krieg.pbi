@@ -79,15 +79,15 @@ Procedure AddEinheit(spieler,name.s,angriff,abwehr,tp,schritte,reichweite,salven
         Case #PB_Event_Repaint
           RePaint(EventWindow())
           StartDrawing(WindowOutput(window))
-            Line(5, 47,390,0,0)
-            Line(5, 87,390,0,0)
-            Line(5,127,390,0,0)
-            Line(5,167,390,0,0)
-            
-            Line(5, 47,0,120,0)
-            Line(135, 47,0,120,0)
-            Line(265, 47,0,120,0)
-            Line(395, 47,0,120,0)
+          Line(5, 47,390,0,0)
+          Line(5, 87,390,0,0)
+          Line(5,127,390,0,0)
+          Line(5,167,390,0,0)
+          
+          Line(5, 47,0,120,0)
+          Line(135, 47,0,120,0)
+          Line(265, 47,0,120,0)
+          Line(395, 47,0,120,0)
           StopDrawing()
           For x=0 To 2
             DrawTransparentImage(icon(ehicon(EinheitBild(x),0)),WindowOutput(window),30,50+x*40,32,32,0,0,32,32,$FF00FF)
@@ -152,7 +152,7 @@ Procedure Window_Rekrutieren_Msg_ZuWenigGeld(text.s)
   mem=spieler(spieler)
   
   TextGadget(-1,50,20,140,70,"Ihr habt nicht genug "+#CRLF$+"Taler um Euch"+#CRLF$+text+#CRLF$+"zu kaufen!")
-  ImageGadget(#PB_Any,10,20,32,32,ImageID(wicon(24)))
+  ImageGadget(#PB_Any,10,20,32,32,ImageID(icon(24)))
   
   button=ButtonGadget(-1,50,100,100,20,"Ohh!")
   
@@ -229,8 +229,8 @@ Procedure Window_Rekrutieren(spieler)
     AddGadgetItem(combo,-1,"Kreuzritter")
     SetGadgetState(combo,0)
     
-    krieger_bild=ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(ehicon(bild,0))) )
-    ImageGadget(#PB_Any, 178, 10, 32, 32, ImageID (wicon(33)) )
+    krieger_bild=ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(ehicon(bild,0))) )
+    ImageGadget(#PB_Any, 178, 10, 32, 32, ImageID (icon(33)) )
     
     button=ButtonGadget(-1,20,200,80,20,"Kaufen")
     abbrechen=ButtonGadget(-1,120,200,80,20,"Abbrechen")
@@ -355,7 +355,7 @@ Procedure Window_Rekrutieren(spieler)
               SetGadgetText(t6,Str(schritte))
               SetGadgetText(t7,Str(sold))
               SetGadgetText(text,"Diese Einheit "+name+Chr(10)+"kostet euch "+Str(sold*2)+" Taler")
-              SetGadgetState(krieger_bild,ImageID(Wicon(ehicon(bild,0))))
+              SetGadgetState(krieger_bild,ImageID(icon(ehicon(bild,0))))
               ;endcase
             Case button
               If PeekL(mem+25)-sold*2>0 ;mehr geld - sold * 10
@@ -384,7 +384,7 @@ Procedure Window_Rekrutieren(spieler)
     mem=spieler(spieler)
     
     TextGadget(-1,50,20,180,70,"Ihr habt zu viele Einheiten."+#CRLF$+"Ihr müsst erst welche entlassen"+#CRLF$+"um neue Rekrutieren zu können")
-    ImageGadget(#PB_Any, 10, 20, 32, 32, ImageID (Wicon(3)) )
+    ImageGadget(#PB_Any, 10, 20, 32, 32, ImageID (icon(3)) )
     button=ButtonGadget(-1,70,100,100,20,"Schade")
     
     Repeat
@@ -425,21 +425,21 @@ Procedure Window_Inspizieren(spieler)
       ContainerGadget(-1,10,10+x*120,200,110,#PB_Container_Single      )
     Else
       ContainerGadget(-1,230,10+(x-4)*120,200,110,#PB_Container_Single )
-      EndIf
-      If PeekL(mem+224+(x*100))
-        TextGadget(-1,50,0,80,18,PeekS(mem+200+(x*100),16))
-        TextGadget(-1,130,0,60,20,eh_titel(PeekL(mem+252+(x*100))),#PB_Text_Right)
-        TextGadget(-1,50,18,140,18,"Spezial: "+spezial(PeekL(mem+256+(x*100))))
-        TextGadget(-1,5,36,60,54,"Angriff:"+#CRLF$+"Abwehr:"+#CRLF$+"Treffer:")
-        TextGadget(-1,65,36,30,54,Str(PeekL(mem+216+(x*100)))+#CRLF$+Str(PeekL(mem+220+(x*100)))+#CRLF$+Str(PeekL(mem+224+(x*100)))+"/"+Str(PeekL(mem+269+(x*100))),#PB_Text_Center)
-        TextGadget(-1,95,36,60,54,"Salven:"+#CRLF$+"Schritte:"+#CRLF$+"Sold:")
-        TextGadget(-1,155,36,40,54,Str(PeekL(mem+236+(x*100)))+#CRLF$+Str(PeekL(mem+228+(x*100)))+#CRLF$+Str(PeekL(mem+240+(x*100))),#PB_Text_Right)
-        behalten(x)=CheckBoxGadget(-1,5,90,190,20,"Behalten")
-        SetGadgetState(behalten(x),1)
-      Else
-        behalten(x)=CheckBoxGadget(-1,0,0,0,0,"")
-        HideGadget(behalten(x),1)
-      EndIf
+    EndIf
+    If PeekL(mem+224+(x*100))
+      TextGadget(-1,50,0,80,18,PeekS(mem+200+(x*100),16))
+      TextGadget(-1,130,0,60,20,eh_titel(PeekL(mem+252+(x*100))),#PB_Text_Right)
+      TextGadget(-1,50,18,140,18,"Spezial: "+spezial(PeekL(mem+256+(x*100))))
+      TextGadget(-1,5,36,60,54,"Angriff:"+#CRLF$+"Abwehr:"+#CRLF$+"Treffer:")
+      TextGadget(-1,65,36,30,54,Str(PeekL(mem+216+(x*100)))+#CRLF$+Str(PeekL(mem+220+(x*100)))+#CRLF$+Str(PeekL(mem+224+(x*100)))+"/"+Str(PeekL(mem+269+(x*100))),#PB_Text_Center)
+      TextGadget(-1,95,36,60,54,"Salven:"+#CRLF$+"Schritte:"+#CRLF$+"Sold:")
+      TextGadget(-1,155,36,40,54,Str(PeekL(mem+236+(x*100)))+#CRLF$+Str(PeekL(mem+228+(x*100)))+#CRLF$+Str(PeekL(mem+240+(x*100))),#PB_Text_Right)
+      behalten(x)=CheckBoxGadget(-1,5,90,190,20,"Behalten")
+      SetGadgetState(behalten(x),1)
+    Else
+      behalten(x)=CheckBoxGadget(-1,0,0,0,0,"")
+      HideGadget(behalten(x),1)
+    EndIf
     CloseGadgetList()
     ;}
   Next
@@ -564,7 +564,7 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
       Next
       If einheitgeaendert=0 And einheit
         If WindowMouseY(window)<160;oberer teil
-          If WindowMouseX<160;links oben; erholen
+          If WindowMouseX<160      ;links oben; erholen
             einheit-1
             PokeB(mem+268+(einheit*100),0)
             Event=#PB_Event_Repaint
@@ -607,25 +607,25 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
         If EventWindow()=window
           ;{
           StartDrawing(WindowOutput(window))
-            DrawImage(ImageID(krieger_verteilung),0,0)
-            If spieler2=-1
-              DrawImage(ImageID(icon(54)),32*6,0)
-              DrawImage(ImageID(icon(54)),32*7,0)
-            EndIf
-            ; DrawingMode(1)
-            ; DrawingFont(FontID(10))
-            ; FrontColor($FFFFFF)
-            ; For x=-1 To 1 Step 2
-            ; For y=-1 To 1 Step 2
-            ; DrawText(  5+x,  5+y,"Erholung:")
-            ; DrawText(  5+x,165+y,"Manöver:")
-            ; DrawText(192+x,  5+y,"Angriff:")
-            ; Next
-            ; Next
-            ; FrontColor($0)
-            ; DrawText(  5,  5,"Erholung:")
-            ; DrawText(  5,165,"Manöver:")
-            ; DrawText(192,  5,"Angriff:")
+          DrawImage(ImageID(krieger_verteilung),0,0)
+          If spieler2=-1
+            DrawImage(ImageID(icon(54)),32*6,0)
+            DrawImage(ImageID(icon(54)),32*7,0)
+          EndIf
+          ; DrawingMode(1)
+          ; DrawingFont(FontID(10))
+          ; FrontColor($FFFFFF)
+          ; For x=-1 To 1 Step 2
+          ; For y=-1 To 1 Step 2
+          ; DrawText(  5+x,  5+y,"Erholung:")
+          ; DrawText(  5+x,165+y,"Manöver:")
+          ; DrawText(192+x,  5+y,"Angriff:")
+          ; Next
+          ; Next
+          ; FrontColor($0)
+          ; DrawText(  5,  5,"Erholung:")
+          ; DrawText(  5,165,"Manöver:")
+          ; DrawText(192,  5,"Angriff:")
           StopDrawing()
           pheilen=0
           pmanoever=0
@@ -657,7 +657,7 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
             EndIf
           Next
         EndIf ;}
-        ;endcase
+              ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
@@ -671,12 +671,12 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
   ForEver
   
 EndProcedure
-  
-  
+
+
 ;##### ------------------------------------------------------------------------
 ;##### Kriegsnachrichten
 ;##### ------------------------------------------------------------------------
-  
+
 Procedure.s Window_Krieg(spieler)
   window=WinOpen(300,240,"Wählt Euer Opfer!")
   
@@ -693,8 +693,8 @@ Procedure.s Window_Krieg(spieler)
   button=ButtonGadget(-1,25,200,100,30,"Krieg")
   abbrechen=ButtonGadget(-1,175,200,100,30,"Abbrechen")
   
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(33)) )
-  ImageGadget(#PB_Any, 258, 10, 32, 32, ImageID (wicon(33)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(33)) )
+  ImageGadget(#PB_Any, 258, 10, 32, 32, ImageID (icon(33)) )
   
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -732,7 +732,7 @@ Procedure Window_Krieg_Gewonnen(spieler)
   TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
   TextGadget(-1,10, 50,240,60,"Ihr konntet Euch gegenüber den Angreifern behaupten und seid Siegreich aus der Schlacht emporgegangen")
   button=ButtonGadget(-1,80,110,100,20,"Fertig")
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(23)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -764,7 +764,7 @@ Procedure Window_Krieg_Verloren(spieler)
   TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
   TextGadget(-1,10, 50,240,60,"Ihr seit als Verlierer aus der Schlacht hervorgegangen. Auch eure Enkel werden sich mit Schande an diesen Tag erinnern.")
   button=ButtonGadget(-1,80,110,100,20,"Grrr!")
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(23)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -796,11 +796,11 @@ Procedure Window_Krieg_Kriegsforderung(spieler)
   ;CreateGadgetList(WindowID(window))
   TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
   TextGadget(-1,10, 50,240,60,"Ihr habt Euern Feind niedergestreckt. Nun könnt Ihr eine Kriegsforderung an den Verlierer stellen.")
-  Frame3DGadget(-1,10,110,240,60,"Märkte:")
-  Frame3DGadget(-1,10,170,240,60,"Mühlen:")
-  Frame3DGadget(-1,10,230,240,60,"Taler:")
-  Frame3DGadget(-1,10,290,240,60,"Ländereien:")
-  Frame3DGadget(-1,10,350,240,60,"Sklaven:")
+  FrameGadget(-1,10,110,240,60,"Märkte:")
+  FrameGadget(-1,10,170,240,60,"Mühlen:")
+  FrameGadget(-1,10,230,240,60,"Taler:")
+  FrameGadget(-1,10,290,240,60,"Ländereien:")
+  FrameGadget(-1,10,350,240,60,"Sklaven:")
   tb1=TrackBarGadget(-1,50,130,150,20,0,10,#PB_TrackBar_Ticks)
   tb2=TrackBarGadget(-1,50,190,150,20,0,10,#PB_TrackBar_Ticks)
   tb3=TrackBarGadget(-1,50,250,150,20,0,50000)
@@ -813,12 +813,12 @@ Procedure Window_Krieg_Kriegsforderung(spieler)
   tx5=TextGadget(-1,200,370,40,20,"0")
   button=ButtonGadget(-1,80,420,100,20,"Fertig",#PB_TrackBar_Ticks)
   
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(23)) )
-  ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (wicon(14)) )
-  ImageGadget(#PB_Any, 20, 185, 32, 32, ImageID (wicon(15)) )
-  ImageGadget(#PB_Any, 20, 245, 32, 32, ImageID (wicon(24)) )
-  ImageGadget(#PB_Any, 20, 305, 32, 32, ImageID (wicon(13)) )
-  ImageGadget(#PB_Any, 20, 365, 32, 32, ImageID (wicon(28)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
+  ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (icon(14)) )
+  ImageGadget(#PB_Any, 20, 185, 32, 32, ImageID (icon(15)) )
+  ImageGadget(#PB_Any, 20, 245, 32, 32, ImageID (icon(24)) )
+  ImageGadget(#PB_Any, 20, 305, 32, 32, ImageID (icon(13)) )
+  ImageGadget(#PB_Any, 20, 365, 32, 32, ImageID (icon(28)) )
   
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -878,12 +878,12 @@ Procedure Window_Krieg_Kriegsforderung2(spieler,*forderung.Kriegsforderung,forde
   TextGadget(-1,60,295,90,20,Str(*forderung\sklaven)+" Sklaven")
   button=ButtonGadget(-1,80,330,100,20,"Fertig",#PB_TrackBar_Ticks)
   
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(23)) )
-  ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (wicon(14)) )
-  ImageGadget(#PB_Any, 20, 165, 32, 32, ImageID (wicon(15)) )
-  ImageGadget(#PB_Any, 20, 205, 32, 32, ImageID (wicon(24)) )
-  ImageGadget(#PB_Any, 20, 245, 32, 32, ImageID (wicon(13)) )
-  ImageGadget(#PB_Any, 20, 285, 32, 32, ImageID (wicon(28)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
+  ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (icon(14)) )
+  ImageGadget(#PB_Any, 20, 165, 32, 32, ImageID (icon(15)) )
+  ImageGadget(#PB_Any, 20, 205, 32, 32, ImageID (icon(24)) )
+  ImageGadget(#PB_Any, 20, 245, 32, 32, ImageID (icon(13)) )
+  ImageGadget(#PB_Any, 20, 285, 32, 32, ImageID (icon(28)) )
   
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -917,7 +917,7 @@ Procedure Window_Krieg_Aufgeben()
   button=ButtonGadget(-1,20,50,60,20,"Ja")
   abbrechen=ButtonGadget(-1,120,50,60,20,"Nein")
   
-  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (wicon(33)) )
+  ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(33)) )
   
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -946,7 +946,7 @@ Procedure Window_Krieg_Aufgeben()
   ForEver
   
 EndProcedure
-  
+
 ;##### ------------------------------------------------------------------------
 ;##### Funktionen Schlachtfeld
 ;##### und Einheiten auf dem Schlachtfeld
@@ -962,7 +962,7 @@ Procedure Krieg_Init_Einheiten(spieler)
   ClearList(einheiten())
   ;{ einheiten suchen
   For x=0 To PeekB(spiel);jeden spieler durchgehen
-    For y=0 To 9 ; jede einheit durchgehen
+    For y=0 To 9         ; jede einheit durchgehen
       If PeekB(268+spieler(x)+y*100)=spieler+1
         AddElement(einheiten())
         einheiten()\spieler=x
@@ -1064,19 +1064,19 @@ Procedure Krieg_Init_Einheiten(spieler)
     Next
     ;}
   Next
-
+  
 EndProcedure
 Procedure Krieg_Init_Map(mapnr=0)
   Select mapnr
-
+      
     Case 1
-
+      
       map_mem=?map1
-
+      
     Default
-
+      
       map_mem=?map1
-
+      
   EndSelect
   
   CopyMemory(map_mem,@krieg_map(),1200)
@@ -1103,7 +1103,7 @@ Procedure Krieg_Count_Spieler()
   ProcedureReturn x
 EndProcedure
 Procedure Krieg_Set_Current_Player(spieler_dran)
-
+  
   ForEach einheiten()
     If einheiten()\spieler=spieler_dran
       einheiten()\schritte=PeekL(einheiten()\mem+28)
@@ -1156,122 +1156,122 @@ Procedure Krieg_Aufgeben(schritte_gesammt.l,spieler_dran,spieler,window)
   ProcedureReturn einer_hat_gewonnen
 EndProcedure
 Procedure Krieg_Beenden(spieler_dran,spieler)
-If spieler_dran=spieler;verteidiger hat gewonnen
-;{
-  mem=spieler(spieler)
-  If PeekB(spieler(spieler))=1;verteidiger=mensch
-    Window_Krieg_Gewonnen(spieler_dran)
-  EndIf
-  For x=0 To 4
-    If Angreifer_Ort(x)
-      PokeL(mem+1200+Angreifer_Ort(x)*20+00,0)
-      PokeL(mem+1200+Angreifer_Ort(x)*20+04,0)
-      PokeL(mem+1200+Angreifer_Ort(x)*20+08,0)
-      PokeL(mem+1200+Angreifer_Ort(x)*20+12,0)
-      PokeL(mem+1200+Angreifer_Ort(x)*20+16,0)
-      If PeekB(spieler(Angreifer_Ort(x)-1))=1;verteidiger=mensch
-        Window_Krieg_Verloren(Angreifer_Ort(x)-1)
-      EndIf
+  If spieler_dran=spieler;verteidiger hat gewonnen
+                         ;{
+    mem=spieler(spieler)
+    If PeekB(spieler(spieler))=1;verteidiger=mensch
+      Window_Krieg_Gewonnen(spieler_dran)
     EndIf
-  Next
-;}
-Else;Angreifer hat gewonnen
-;{
-  Define *v.Kriegsforderung
-  If PeekB(spieler(spieler_dran))=1
-    *v=Window_Krieg_Kriegsforderung(spieler_dran)
-  Else
-    *v=AllocateMemory(20)
-  EndIf
-  mem=spieler(spieler_dran)
-  PokeL(mem+1200+spieler*20+00,0)
-  PokeL(mem+1200+spieler*20+04,0)
-  PokeL(mem+1200+spieler*20+08,0)
-  PokeL(mem+1200+spieler*20+12,0)
-  PokeL(mem+1200+spieler*20+16,0)
-  mem=spieler(spieler)
-  PokeL(mem+1200+spieler_dran*20+00,PeekL(mem+1200+spieler_dran*20+00)+*v\maerkte)
-  PokeL(mem+1200+spieler_dran*20+04,PeekL(mem+1200+spieler_dran*20+04)+*v\muehlen)
-  PokeL(mem+1200+spieler_dran*20+08,PeekL(mem+1200+spieler_dran*20+08)+*v\taler)
-  PokeL(mem+1200+spieler_dran*20+12,PeekL(mem+1200+spieler_dran*20+12)+*v\land)
-  PokeL(mem+1200+spieler_dran*20+16,PeekL(mem+1200+spieler_dran*20+16)+*v\sklaven)
-  If PeekB(spieler(spieler))=1
-    Window_Krieg_Kriegsforderung2(spieler,*v,spieler_dran)
+    For x=0 To 4
+      If Angreifer_Ort(x)
+        PokeL(mem+1200+Angreifer_Ort(x)*20+00,0)
+        PokeL(mem+1200+Angreifer_Ort(x)*20+04,0)
+        PokeL(mem+1200+Angreifer_Ort(x)*20+08,0)
+        PokeL(mem+1200+Angreifer_Ort(x)*20+12,0)
+        PokeL(mem+1200+Angreifer_Ort(x)*20+16,0)
+        If PeekB(spieler(Angreifer_Ort(x)-1))=1;verteidiger=mensch
+          Window_Krieg_Verloren(Angreifer_Ort(x)-1)
+        EndIf
+      EndIf
+    Next
+    ;}
+  Else;Angreifer hat gewonnen
+      ;{
+    Define *v.Kriegsforderung
+    If PeekB(spieler(spieler_dran))=1
+      *v=Window_Krieg_Kriegsforderung(spieler_dran)
+    Else
+      *v=AllocateMemory(20)
+    EndIf
+    mem=spieler(spieler_dran)
+    PokeL(mem+1200+spieler*20+00,0)
+    PokeL(mem+1200+spieler*20+04,0)
+    PokeL(mem+1200+spieler*20+08,0)
+    PokeL(mem+1200+spieler*20+12,0)
+    PokeL(mem+1200+spieler*20+16,0)
+    mem=spieler(spieler)
+    PokeL(mem+1200+spieler_dran*20+00,PeekL(mem+1200+spieler_dran*20+00)+*v\maerkte)
+    PokeL(mem+1200+spieler_dran*20+04,PeekL(mem+1200+spieler_dran*20+04)+*v\muehlen)
+    PokeL(mem+1200+spieler_dran*20+08,PeekL(mem+1200+spieler_dran*20+08)+*v\taler)
+    PokeL(mem+1200+spieler_dran*20+12,PeekL(mem+1200+spieler_dran*20+12)+*v\land)
+    PokeL(mem+1200+spieler_dran*20+16,PeekL(mem+1200+spieler_dran*20+16)+*v\sklaven)
+    If PeekB(spieler(spieler))=1
+      Window_Krieg_Kriegsforderung2(spieler,*v,spieler_dran)
+    EndIf
+    
+    ;}
   EndIf
   
-;}
-EndIf
-                  
-;{ getötete einheiten töten
-For x=0 To PeekB(spiel);jeden spieler durchgehen
-  For y=0 To 9 ; jede einheit durchgehen
-    If PeekB(268+spieler(x)+y*100)=spieler+1
-      einheitda=0
-      ForEach einheiten()
-        If einheiten()\spieler=x
-          If einheiten()\einheit=y
-            einheitda=1
-            PokeL(224+spieler(x)+y*100,Round(PeekL(24+einheiten()\mem)/4,#PB_Round_Up))
+  ;{ getötete einheiten töten
+  For x=0 To PeekB(spiel);jeden spieler durchgehen
+    For y=0 To 9         ; jede einheit durchgehen
+      If PeekB(268+spieler(x)+y*100)=spieler+1
+        einheitda=0
+        ForEach einheiten()
+          If einheiten()\spieler=x
+            If einheiten()\einheit=y
+              einheitda=1
+              PokeL(224+spieler(x)+y*100,Round(PeekL(24+einheiten()\mem)/4,#PB_Round_Up))
+            EndIf
           EndIf
-        EndIf
-      Next
-      If einheitda=0
-        For z=0 To 24
-          PokeL(200+spieler(x)+y*100+z*4,0)
         Next
+        If einheitda=0
+          For z=0 To 24
+            PokeL(200+spieler(x)+y*100+z*4,0)
+          Next
+        EndIf
       EndIf
-    EndIf
+    Next
   Next
-Next
-;}
+  ;}
 EndProcedure
 Procedure Krieg_Test_Beendet(window)
-If IsWindow(window)
-ProcedureReturn 0
-EndIf
-ProcedureReturn 1
+  If IsWindow(window)
+    ProcedureReturn 0
+  EndIf
+  ProcedureReturn 1
 EndProcedure
 Procedure Krieg_Naester_Spieler(mem_wer_ist_dran,anzahl_spieler,spieler,window,einer_hat_gewonnen,einheit,EinheitBild,einheitx,einheity)
-wer_ist_dran=PeekL(mem_wer_ist_dran)
-wer_war_dran=wer_ist_dran
-Repeat
-  wer_ist_dran+1
-  If wer_ist_dran>anzahl_spieler
-    wer_ist_dran=-1
+  wer_ist_dran=PeekL(mem_wer_ist_dran)
+  wer_war_dran=wer_ist_dran
+  Repeat
+    wer_ist_dran+1
+    If wer_ist_dran>anzahl_spieler
+      wer_ist_dran=-1
+    EndIf
+    If wer_ist_dran=-1
+      spieler_dran=spieler
+    Else
+      spieler_dran=Angreifer_Ort(wer_ist_dran)-1
+    EndIf
+    
+    If wer_ist_dran=wer_war_dran Or einer_hat_gewonnen
+      ;-einer hat den krieg gewonnen
+      Krieg_Beenden(spieler_dran,spieler)
+      CloseWindow(window)
+      ProcedureReturn 1
+      Break
+    EndIf
+    
+    schritte_gesammt=Krieg_Set_Current_Player(spieler_dran)
+    If schritte_gesammt
+      Break
+    EndIf
+  ForEver
+  If PeekL(einheit)
+    DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
+    PokeL(einheit,0)
   EndIf
-  If wer_ist_dran=-1
-    spieler_dran=spieler
-  Else
-    spieler_dran=Angreifer_Ort(wer_ist_dran)-1
-  EndIf
-  
-  If wer_ist_dran=wer_war_dran Or einer_hat_gewonnen
-    ;-einer hat den krieg gewonnen
-    Krieg_Beenden(spieler_dran,spieler)
-    CloseWindow(window)
-    ProcedureReturn 1
-    Break
-  EndIf
-  
-  schritte_gesammt=Krieg_Set_Current_Player(spieler_dran)
-  If schritte_gesammt
-    Break
-  EndIf
-ForEver
-If PeekL(einheit)
-  DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
-  PokeL(einheit,0)
-EndIf
-PokeL(mem_wer_ist_dran,wer_ist_dran)
-ProcedureReturn spieler_dran
+  PokeL(mem_wer_ist_dran,wer_ist_dran)
+  ProcedureReturn spieler_dran
 EndProcedure
 
 Procedure Krieg_Zeichne_Wer_Ist_Dran(window,wer_ist_dran)
-
-StartDrawing(WindowOutput(window))
-If FontID(Fonts(12))
-  DrawingFont(FontID(Fonts(12)))
-EndIf
+  
+  StartDrawing(WindowOutput(window))
+  If FontID(Fonts(12))
+    DrawingFont(FontID(Fonts(12)))
+  EndIf
   For x=0 To 4
     If Angreifer_Ort(x)
       If wer_ist_dran=x
@@ -1286,8 +1286,8 @@ EndIf
   Else
     DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$C0C0C0)
   EndIf
-StopDrawing()
-              
+  StopDrawing()
+  
 EndProcedure
 
 
@@ -1296,46 +1296,46 @@ EndProcedure
 ;##### ------------------------------------------------------------------------
 
 Procedure CPU_Play(*Aktion.AktionOutput,*Spieler.AktionInput,List EH.Krieg_Einheit(),Array KM.l(2))
-ForEach EH()
-If EH()\spieler=*Spieler\spieler
-AnzahlEigeneEinheiten+1
-Else
-AnzahlGegnerEinheiten+1
-EndIf
-Next
-If AnzahlEigeneEinheiten>AnzahlGegnerEinheiten
-If *spieler\einheit
-SelectElement(Eh(),*Spieler\einheit-1)
-
-If krieg_map_passierbar(Eh()\x-1,eh()\y)=1
-*Aktion\CPU_Event=513
-*Aktion\WindowX=(Eh()\x-1)*32+16
-*Aktion\WindowY=(Eh()\y+0)*32+16
-Else
-*Aktion\CPU_Event=513
-*Aktion\WindowX=Eh()\x*32+16
-*Aktion\WindowY=Eh()\y*32+16
-*Aktion\Schritte_Gesammt-EH()\schritte
-EH()\schritte=0
-EndIf
-
-Else;not *spieler\einheit
-ForEach EH()
-If EH()\spieler=*Spieler\spieler And EH()\schritte
-*Aktion\CPU_Event=513
-*Aktion\WindowX=Eh()\x*32+16
-*Aktion\WindowY=Eh()\y*32+16
-Break
-EndIf
-Next
-EndIf
-EndIf
+  ForEach EH()
+    If EH()\spieler=*Spieler\spieler
+      AnzahlEigeneEinheiten+1
+    Else
+      AnzahlGegnerEinheiten+1
+    EndIf
+  Next
+  If AnzahlEigeneEinheiten>AnzahlGegnerEinheiten
+    If *spieler\einheit
+      SelectElement(Eh(),*Spieler\einheit-1)
+      
+      If krieg_map_passierbar(Eh()\x-1,eh()\y)=1
+        *Aktion\CPU_Event=513
+        *Aktion\WindowX=(Eh()\x-1)*32+16
+        *Aktion\WindowY=(Eh()\y+0)*32+16
+      Else
+        *Aktion\CPU_Event=513
+        *Aktion\WindowX=Eh()\x*32+16
+        *Aktion\WindowY=Eh()\y*32+16
+        *Aktion\Schritte_Gesammt-EH()\schritte
+        EH()\schritte=0
+      EndIf
+      
+    Else;not *spieler\einheit
+      ForEach EH()
+        If EH()\spieler=*Spieler\spieler And EH()\schritte
+          *Aktion\CPU_Event=513
+          *Aktion\WindowX=Eh()\x*32+16
+          *Aktion\WindowY=Eh()\y*32+16
+          Break
+        EndIf
+      Next
+    EndIf
+  EndIf
 EndProcedure
 
 ;##### ------------------------------------------------------------------------
 ;##### Krieg
 ;##### ------------------------------------------------------------------------
-  
+
 Procedure Window_Krieg_Kampf(spieler)
   ; vorbereitung
   Krieg_Init_Map(1)
@@ -1378,47 +1378,47 @@ Procedure Window_Krieg_Kampf(spieler)
     cpu_time&255
     time=time&1023
     If GetActiveWindow()=window
-    If einheit 
-      If time>750
-        DrawTransparentImage(icon(krieg_map(einheitx,einheity)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
-      Else
-        DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
+      If einheit 
+        If time>750
+          DrawTransparentImage(icon(krieg_map(einheitx,einheity)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
+        Else
+          DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
+        EndIf
       EndIf
-    EndIf
     EndIf
     ;}
     ;{ zeichne in die box links unten infos über gewählte einheit
-        If EventWindow()=window And GetActiveWindow()=window
-          ForEach einheiten()
-            If einheit=ListIndex(einheiten())+1 And gezeichnet2<>einheit
-                StartDrawing(WindowOutput(window))
-                  DrawImage(ImageID(krieg_voll),000,481)
-                  DrawingFont(FontID(Fonts(12)))
-                  DrawingMode(1)
-                  FrontColor(0)
-                  DrawText(005,483,PeekS(einheiten()\mem,16))
-                  DrawText(105,483,PeekS(spieler(einheiten()\spieler)+1,16))
-                  DrawText(022,523,Str(PeekL(einheiten()\mem+16)))
-                  DrawText(059,523,Str(PeekL(einheiten()\mem+20)))
-                  DrawText(096,523,Str(PeekL(einheiten()\mem+36)))
-                  DrawText(133,523,Str(einheiten()\schritte))
-                  If PeekL(einheiten()\mem+69)
-                    Box(025,545,99*PeekL(einheiten()\mem+24)/PeekL(einheiten()\mem+69),4,$00FF00)
-                  EndIf
-                StopDrawing()
-                gezeichnet2=ListIndex(Einheiten())+1
-                Break
-            EndIf
-          Next
-          If Not einheit
-            StartDrawing(WindowOutput(window))
-              DrawImage(ImageID(krieg_leer),0,481)
-            StopDrawing()
-            gezeichnet2=0
+    If EventWindow()=window And GetActiveWindow()=window
+      ForEach einheiten()
+        If einheit=ListIndex(einheiten())+1 And gezeichnet2<>einheit
+          StartDrawing(WindowOutput(window))
+          DrawImage(ImageID(krieg_voll),000,481)
+          DrawingFont(FontID(Fonts(12)))
+          DrawingMode(1)
+          FrontColor(0)
+          DrawText(005,483,PeekS(einheiten()\mem,16))
+          DrawText(105,483,PeekS(spieler(einheiten()\spieler)+1,16))
+          DrawText(022,523,Str(PeekL(einheiten()\mem+16)))
+          DrawText(059,523,Str(PeekL(einheiten()\mem+20)))
+          DrawText(096,523,Str(PeekL(einheiten()\mem+36)))
+          DrawText(133,523,Str(einheiten()\schritte))
+          If PeekL(einheiten()\mem+69)
+            Box(025,545,99*PeekL(einheiten()\mem+24)/PeekL(einheiten()\mem+69),4,$00FF00)
           EndIf
-          
+          StopDrawing()
+          gezeichnet2=ListIndex(Einheiten())+1
+          Break
         EndIf
-
+      Next
+      If Not einheit
+        StartDrawing(WindowOutput(window))
+        DrawImage(ImageID(krieg_leer),0,481)
+        StopDrawing()
+        gezeichnet2=0
+      EndIf
+      
+    EndIf
+    
     ;}    
     ;{ KI
     If cpu_play And Event=0
@@ -1437,14 +1437,14 @@ Procedure Window_Krieg_Kampf(spieler)
         CPU_EventGadget=Aktion\Event_Gadget
       EndIf
     Else
-     CPU_Event=0
-     CPU_EventGadget=0
+      CPU_Event=0
+      CPU_EventGadget=0
     EndIf
     ;}
-
+    
     Select Event|CPU_Event
       Case 513;mausklick aufs fenster
-      ;{
+              ;{
         If PeekB(spieler(spieler_dran))=1 Or CPU_Event;if spieler_dran=mensch 
           If EventWindow()=window And WindowMouseY<480 And WindowMouseY>0 And WindowMouseX>0 And WindowMouseX<640
             If einheit;{
@@ -1458,13 +1458,13 @@ Procedure Window_Krieg_Kampf(spieler)
                         Break
                         ;}
                       ElseIf einheiten()\spieler=spieler_dran 
-                       If einheiten()\schritte;{
-                        DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
-                        einheitx=einheiten()\x
-                        einheity=einheiten()\y
-                        EinheitBild=PeekL(einheiten()\mem+64)
-                        einheit=ListIndex(einheiten())+1
-                        Break
+                        If einheiten()\schritte;{
+                          DrawTransparentImage(icon(ehicon(EinheitBild,0)),WindowOutput(window),einheitx*32,einheity*32,32,32,0,0,32,32,$FF00FF)
+                          einheitx=einheiten()\x
+                          einheity=einheiten()\y
+                          EinheitBild=PeekL(einheiten()\mem+64)
+                          einheit=ListIndex(einheiten())+1
+                          Break
                         EndIf
                         ;}
                       Else;{
@@ -1529,7 +1529,7 @@ Procedure Window_Krieg_Kampf(spieler)
                   Next
                   ;endcase
                 Case 1
-                ;{
+                  ;{
                   If WindowMouseX/32>=einheitx-1 And WindowMouseX/32<=einheitx+1
                     If WindowMouseY/32>=einheity-1 And WindowMouseY/32<=einheity+1
                       PlaySound(sounds(15))
@@ -1569,7 +1569,7 @@ Procedure Window_Krieg_Kampf(spieler)
         EndIf
         ;}
       Case 512;mausmove
-      ;{ zeichne in die box rechts unten infos über die mouseover einheit
+              ;{ zeichne in die box rechts unten infos über die mouseover einheit
         If EventWindow()=window And WindowMouseY<480 And GetActiveWindow()=window
           eh_erfasst=0
           ForEach einheiten()
@@ -1577,19 +1577,19 @@ Procedure Window_Krieg_Kampf(spieler)
               eh_erfasst=1
               If gezeichnet<>ListIndex(einheiten())+1
                 StartDrawing(WindowOutput(window))
-                  DrawImage(ImageID(krieg_voll),460,481)
-                  DrawingFont(FontID(Fonts(12)))
-                  DrawingMode(1)
-                  FrontColor(0)
-                  DrawText(465,483,PeekS(einheiten()\mem,16))
-                  DrawText(565,483,PeekS(spieler(einheiten()\spieler)+1,16))
-                  DrawText(482,523,Str(PeekL(einheiten()\mem+16)))
-                  DrawText(519,523,Str(PeekL(einheiten()\mem+20)))
-                  DrawText(556,523,Str(PeekL(einheiten()\mem+36)))
-                  DrawText(593,523,Str(einheiten()\schritte))
-                  If PeekL(einheiten()\mem+69)
-                    Box(485,545,99*PeekL(einheiten()\mem+24)/PeekL(einheiten()\mem+69),4,$00FF00)
-                  EndIf
+                DrawImage(ImageID(krieg_voll),460,481)
+                DrawingFont(FontID(Fonts(12)))
+                DrawingMode(1)
+                FrontColor(0)
+                DrawText(465,483,PeekS(einheiten()\mem,16))
+                DrawText(565,483,PeekS(spieler(einheiten()\spieler)+1,16))
+                DrawText(482,523,Str(PeekL(einheiten()\mem+16)))
+                DrawText(519,523,Str(PeekL(einheiten()\mem+20)))
+                DrawText(556,523,Str(PeekL(einheiten()\mem+36)))
+                DrawText(593,523,Str(einheiten()\schritte))
+                If PeekL(einheiten()\mem+69)
+                  Box(485,545,99*PeekL(einheiten()\mem+24)/PeekL(einheiten()\mem+69),4,$00FF00)
+                EndIf
                 StopDrawing()
                 gezeichnet=ListIndex(einheiten())+1
               EndIf
@@ -1597,7 +1597,7 @@ Procedure Window_Krieg_Kampf(spieler)
           Next
           If eh_erfasst=0 And gezeichnet
             StartDrawing(WindowOutput(window))
-              DrawImage(ImageID(krieg_leer),460,481)
+            DrawImage(ImageID(krieg_leer),460,481)
             StopDrawing()
             gezeichnet=0
           EndIf
@@ -1609,36 +1609,36 @@ Procedure Window_Krieg_Kampf(spieler)
         RePaint(EventWindow())
         If EventWindow()=window
           StartDrawing(WindowOutput(window))
-            For x=0 To 19
-              For y=0 To 14
-                DrawImage(ImageID(icon(krieg_map(x,y))),x*32,y*32)
-                ;DrawTransparentImage(icon(krieg_map(x,y)),WindowOutput(window),x*32,y*32,32,32,0,0,32,32,$FF00FF)
-              Next
+          For x=0 To 19
+            For y=0 To 14
+              DrawImage(ImageID(icon(krieg_map(x,y))),x*32,y*32)
+              ;DrawTransparentImage(icon(krieg_map(x,y)),WindowOutput(window),x*32,y*32,32,32,0,0,32,32,$FF00FF)
             Next
-            DrawImage(ImageID(krieg_leer),0,481)
-            DrawImage(ImageID(krieg_leer),460,481)
-            Line(0,480,640,0,0)
-            Box(200,481,80,80,$C0C0C0)
-            Box(380,481,80,80,$C0C0C0)
-            BackColor($C0C0C0)
-            DrawingFont(FontID(Fonts(11)))
-            DrawText(200,481,"Angreifer:",0)
-            DrawText(380,481,"Verteidiger:",0)
-            DrawingFont(FontID(Fonts(12)))
-            For x=0 To 4
-              If Angreifer_Ort(x)
-                If wer_ist_dran=x
-                  DrawText(200,501+x*12,PeekS(spieler(Angreifer_Ort(x)-1)+1,16),0,$FFFFFF)
-                Else
-                  DrawText(200,501+x*12,PeekS(spieler(Angreifer_Ort(x)-1)+1,16))
-                EndIf
+          Next
+          DrawImage(ImageID(krieg_leer),0,481)
+          DrawImage(ImageID(krieg_leer),460,481)
+          Line(0,480,640,0,0)
+          Box(200,481,80,80,$C0C0C0)
+          Box(380,481,80,80,$C0C0C0)
+          BackColor($C0C0C0)
+          DrawingFont(FontID(Fonts(11)))
+          DrawText(200,481,"Angreifer:",0)
+          DrawText(380,481,"Verteidiger:",0)
+          DrawingFont(FontID(Fonts(12)))
+          For x=0 To 4
+            If Angreifer_Ort(x)
+              If wer_ist_dran=x
+                DrawText(200,501+x*12,PeekS(spieler(Angreifer_Ort(x)-1)+1,16),0,$FFFFFF)
+              Else
+                DrawText(200,501+x*12,PeekS(spieler(Angreifer_Ort(x)-1)+1,16))
               EndIf
-            Next
-            If wer_ist_dran=-1
-              DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$FFFFFF)
-            Else
-              DrawText(380,501,PeekS(spieler(spieler)+1,16))
             EndIf
+          Next
+          If wer_ist_dran=-1
+            DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$FFFFFF)
+          Else
+            DrawText(380,501,PeekS(spieler(spieler)+1,16))
+          EndIf
           StopDrawing()
           ForEach einheiten()
             DrawTransparentImage(icon(ehicon(PeekL(einheiten()\mem+64),0)),WindowOutput(window),einheiten()\x*32,einheiten()\y*32,32,32,0,0,32,32,$FF00FF)
@@ -1650,12 +1650,12 @@ Procedure Window_Krieg_Kampf(spieler)
         Select EventGadget|CPU_EventGadget
           Case naechster
             If PeekB(spieler(spieler_dran))=1
-            spieler_dran=Krieg_Naester_Spieler(@wer_ist_dran,anzahl_spieler,spieler,window,einer_hat_gewonnen,@einheit,einheitbild,einheitx,einheity)
+              spieler_dran=Krieg_Naester_Spieler(@wer_ist_dran,anzahl_spieler,spieler,window,einer_hat_gewonnen,@einheit,einheitbild,einheitx,einheity)
               If Krieg_Test_Beendet(window)
                 ProcedureReturn 1
               EndIf
-            schritte_gesammt=Krieg_Set_Current_Player(spieler_dran)
-            Krieg_Zeichne_Wer_Ist_Dran(window,wer_ist_dran)
+              schritte_gesammt=Krieg_Set_Current_Player(spieler_dran)
+              Krieg_Zeichne_Wer_Ist_Dran(window,wer_ist_dran)
             EndIf
           Case aufgeben
             If PeekB(spieler(spieler_dran))=1
@@ -1676,14 +1676,7 @@ Procedure Window_Krieg_Kampf(spieler)
       schritte_gesammt=Krieg_Set_Current_Player(spieler_dran)
       Krieg_Zeichne_Wer_Ist_Dran(window,wer_ist_dran)
     EndIf  
-
+    
   ForEver
   
 EndProcedure
-  
-; IDE Options = PureBasic 4.41 RC 1 (Windows - x86)
-; CursorPosition = 1467
-; FirstLine = 135
-; Folding = ABAgAAjl5
-; EnableXP
-; CompileSourceDirectory

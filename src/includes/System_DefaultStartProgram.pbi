@@ -13,13 +13,13 @@
 ;##### ------------------------------------------------------------------------
 
 Procedure.i System_DefaultStartProgramm(Ext.s,ExProg.s,ExName.s,DefPRG.s,DefIcon.s)
-
+  
   Protected Res.i, Dir.s
   
   RegOpenKey_(#HKEY_CLASSES_ROOT,Ext,@res)
-    
+  
   If res=0
-
+    
     RegCreateKey_(#HKEY_CLASSES_ROOT,Ext,@res)
     RegSetValue_(#HKEY_CLASSES_ROOT,Ext,#REG_SZ,ExProg,Len(ExProg))
     
@@ -28,24 +28,24 @@ Procedure.i System_DefaultStartProgramm(Ext.s,ExProg.s,ExName.s,DefPRG.s,DefIcon
   RegOpenKey_(#HKEY_CLASSES_ROOT,ExProg,@res)
   
   If res=0
-  
+    
     RegCreateKey_(#HKEY_CLASSES_ROOT,ExProg,@res)
     RegSetValue_(#HKEY_CLASSES_ROOT,ExProg,#REG_SZ,ExName,Len(ExName))
-  
+    
   EndIf
-
-  RegOpenKey_(#HKEY_CLASSES_ROOT,ExProg+"\DefaultIcon",@res)
-
-  If res=0
   
+  RegOpenKey_(#HKEY_CLASSES_ROOT,ExProg+"\DefaultIcon",@res)
+  
+  If res=0
+    
     RegCreateKey_(#HKEY_CLASSES_ROOT,ExProg+"\DefaultIcon",@res)
     
   EndIf
   
   RegOpenKey_(#HKEY_CLASSES_ROOT,ExProg+"\shell\open\command",@res)
-
-  If res=0
   
+  If res=0
+    
     RegCreateKey_(#HKEY_CLASSES_ROOT,ExProg+"\shell",@res)
     RegCreateKey_(#HKEY_CLASSES_ROOT,ExProg+"\shell\open",@res)
     RegCreateKey_(#HKEY_CLASSES_ROOT,ExProg+"\shell\open\command",@res)
@@ -58,9 +58,3 @@ Procedure.i System_DefaultStartProgramm(Ext.s,ExProg.s,ExName.s,DefPRG.s,DefIcon
   RegSetValue_(#HKEY_CLASSES_ROOT,ExProg+"\DefaultIcon",#REG_SZ,DefIcon,Len(DefIcon))
   
 EndProcedure
-; IDE Options = PureBasic 4.31 (Windows - x86)
-; CursorPosition = 7
-; Folding = -
-; EnableXP
-; CurrentDirectory = D:\Projekt\MyEd\
-; CompileSourceDirectory

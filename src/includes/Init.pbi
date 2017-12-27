@@ -8,8 +8,10 @@
 ;##### Grafik und Sound Initialisierung
 ;#---------------------------------------------------------------------------------
 
+UseLZMAPacker()
+UsePNGImageDecoder()
+
 Global Dim icon(#img_icon)
-Global Dim Wicon(#img_icon)
 Global Dim button(#img_button)
 Global Dim schloss(12)
 Global Dim kathedrale(12)
@@ -32,61 +34,88 @@ EndIf
 ;Filename.s = "D:\Projekt\MyEd\Data.pak"
 
 Procedure.i Kaiser_LoadMedia(Filename.s = "")
-
+  
+  tempMem = AllocateMemory(1048576)
+  
   If Filename = ""
     Filename = GetCurrentDirectory()+"Data.pak"
   EndIf
   
-  Protected Pack = OpenPack(Filename.s)
+  Protected Pack = OpenPack(#PB_Any,Filename.s)
   
   If Pack
-  
+    
     For x=1 To #img_button
-      Button(x) = CatchImage(#PB_Any,NextPackFile())
+      NextPackEntry(Pack)
+      UncompressPackMemory(Pack,tempMem,1048576)
+      Button(x) = CatchImage(#PB_Any,tempMem)
     Next x 
     For x=0 To #img_icon
-      Icon(x) = CatchImage(#PB_Any,NextPackFile())
+      NextPackEntry(Pack)
+      UncompressPackMemory(Pack,tempMem,1048576)
+      Icon(x) = CatchImage(#PB_Any,tempMem)
     Next x
-    For x=0 To #img_icon
-      WIcon(x) = CatchImage(#PB_Any,NextPackFile())
-    Next x    
-    Map     = CatchImage(#PB_Any,NextPackFile())
-    info    = CatchImage(#PB_Any,NextPackFile())
-    korn1   = CatchImage(#PB_Any,NextPackFile())
-    korn2   = CatchImage(#PB_Any,NextPackFile())
-    krone   = CatchImage(#PB_Any,NextPackFile())
-  
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    Map     = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    info    = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    korn1   = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    korn2   = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    krone   = CatchImage(#PB_Any,tempMem)
+    
     For x=0 To 12
-      Schloss(x) = CatchImage(#PB_Any,NextPackFile())
+      NextPackEntry(Pack)
+      UncompressPackMemory(Pack,tempMem,1048576)
+      Schloss(x) = CatchImage(#PB_Any,tempMem)
     Next x
     For x=0 To 12
-      Kathedrale(x) = CatchImage(#PB_Any,NextPackFile())
+      NextPackEntry(Pack)
+      UncompressPackMemory(Pack,tempMem,1048576)
+      Kathedrale(x) = CatchImage(#PB_Any,tempMem)
     Next x
     
-    krieger_verteilung  = CatchImage(#PB_Any,NextPackFile())
-    krieg_leer          = CatchImage(#PB_Any,NextPackFile())
-    krieg_voll          = CatchImage(#PB_Any,NextPackFile())
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    krieger_verteilung  = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    krieg_leer          = CatchImage(#PB_Any,tempMem)
+    NextPackEntry(Pack)
+    UncompressPackMemory(Pack,tempMem,1048576)
+    krieg_voll          = CatchImage(#PB_Any,tempMem)
     
     For x=1 To 24
-      Sounds(x)=CatchSound(#PB_Any,NextPackFile())
+      NextPackEntry(Pack)
+      UncompressPackMemory(Pack,tempMem,1048576)
+      Sounds(x)=CatchSound(#PB_Any,tempMem)
     Next x
-  ClosePack()
+    ClosePack(Pack)
   Else
-  
+    
     MessageRequester("","Konnte MediaPack nicht laden !")
     End
     
   EndIf
-
+  
+  FreeMemory(tempMem)
+  
 EndProcedure
 Procedure.i Kaiser_LoadFonts()
-Fonts(0) = LoadFont(#PB_Any,"Comic Sans MS",9);,#PB_Font_Bold)
-Fonts(10) = LoadFont(#PB_Any,"Comic Sans MS",9,#PB_Font_Bold)
-Fonts(11) = LoadFont(#PB_Any,"Comic Sans MS",8,#PB_Font_Bold);für die kriegmap
-Fonts(12) = LoadFont(#PB_Any,"Comic Sans MS",8);für die kriegmap
-Fonts(13) = LoadFont(#PB_Any,"Comic Sans MS",7);für die kriegmap
-
-SetGadgetFont(#PB_Default,FontID(Fonts(0)))
+  Fonts(0) = LoadFont(#PB_Any,"Comic Sans MS",9);,#PB_Font_Bold)
+  Fonts(10) = LoadFont(#PB_Any,"Comic Sans MS",9,#PB_Font_Bold)
+  Fonts(11) = LoadFont(#PB_Any,"Comic Sans MS",8,#PB_Font_Bold);für die kriegmap
+  Fonts(12) = LoadFont(#PB_Any,"Comic Sans MS",8)              ;für die kriegmap
+  Fonts(13) = LoadFont(#PB_Any,"Comic Sans MS",7)              ;für die kriegmap
+  
+  SetGadgetFont(#PB_Default,FontID(Fonts(0)))
 EndProcedure
 
 ;#---------------------------------------------------------------------------------
@@ -98,9 +127,8 @@ Kaiser_LoadFonts()
 ; anale und rekorde
 
 If ReadFile(0,"rekorde")
-  ReadData(0,annale2,Lof(0))
+  ReadData(0,annale,Lof(0))
   CloseFile(0)
-  UnpackMemory(annale2,annale)
 EndIf
 
 ; positionen krieger manöver
@@ -117,8 +145,8 @@ For i=0 To 7 : Read.i pangreifenx(i) : Read.i pangreifeny(i) : Next i
 For x=0 To 19
   For y=0 To 14
     krieg_map(x,y)=54;alles auf grünfläche setzen
-    ;ist eigentlich überflüssig da aus dem DataSection das map geladen wird
-    ;sollte da ein fehler auftreten ist wenigstens alles grün :)
+                     ;ist eigentlich überflüssig da aus dem DataSection das map geladen wird
+                     ;sollte da ein fehler auftreten ist wenigstens alles grün :)
   Next
 Next
 
@@ -228,11 +256,3 @@ For x=0 To 9
   ;spieler(x)=AllocateMemory(#spieler_size)
   spieler(x)=@Spielerdaten(x)
 Next
-
-; IDE Options = PureBasic 4.40 (Windows - x86)
-; CursorPosition = 47
-; FirstLine = 27
-; Folding = 0
-; EnableXP
-; CurrentDirectory = D:\Projekt\MyEd\
-; CompileSourceDirectory

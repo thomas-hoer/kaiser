@@ -2,53 +2,60 @@
 ;##### Erstellung der Data Datei
 ;##### 
 
+IncludeFile "includes/Konstanten.pbi"
+
 Filename.s = "Data.pak"
 
-Define Pack = CreatePack(Filename.s)
+UseLZMAPacker()
+
+Procedure InsertIntoPack(Pack,Filename.s)
+  If Not AddPackFile(Pack,Filename,ReplaceString(Filename,"\","_"))
+    Debug "Fehler bei Datei "+Filename
+  EndIf
+EndProcedure
+
+Define Pack = CreatePack(#PB_Any,Filename.s)
 
 If Pack
-
+  
   Debug "Data"
-
+  
   For x=1 To 19
-    AddPackFile("gfx\"+Str(x)+".bmp")
+    InsertIntoPack(Pack,"gfx\"+Str(x)+".bmp")
   Next x 
-
-  For x=0 To 100
-    AddPackFile("gfx\icon\"+Str(x)+".bmp")
-  Next x
-  For x=0 To 100
-    AddPackFile("gfx\icon\"+Str(x)+".ico")
+  
+  For x=0 To #img_icon
+    InsertIntoPack(Pack,"gfx\icon\"+Str(x)+".png")
   Next x
   
-  AddPackFile("gfx\map.bmp")
-  AddPackFile("gfx\info.bmp")
-  AddPackFile("gfx\korn1.bmp")
-  AddPackFile("gfx\korn2.bmp")
-  AddPackFile("gfx\krone.bmp")
-
+  InsertIntoPack(Pack,"gfx\map.bmp")
+  InsertIntoPack(Pack,"gfx\info.bmp")
+  InsertIntoPack(Pack,"gfx\korn1.bmp")
+  InsertIntoPack(Pack,"gfx\korn2.bmp")
+  InsertIntoPack(Pack,"gfx\krone.bmp")
+  
   For x=0 To 12
-    AddPackFile("gfx\schloss"+Str(x)+".bmp")
+    InsertIntoPack(Pack,"gfx\schloss"+Str(x)+".bmp")
   Next x
   
   For x=0 To 12
-    AddPackFile("gfx\kathedrale"+Str(x)+".bmp")
+    InsertIntoPack(Pack,"gfx\kathedrale"+Str(x)+".bmp")
   Next x
   
-  AddPackFile("gfx\krieger_verteilung.bmp")
-  AddPackFile("gfx\krieg_leer.bmp")
-  AddPackFile("gfx\krieg_voll.bmp")
-
+  InsertIntoPack(Pack,"gfx\krieger_verteilung.bmp")
+  InsertIntoPack(Pack,"gfx\krieg_leer.bmp")
+  InsertIntoPack(Pack,"gfx\krieg_voll.bmp")
+  
   For x=1 To 24
-    AddPackFile("sfx\"+Str(x)+".wav")
+    InsertIntoPack(Pack,"sfx\"+Str(x)+".wav")
   Next x
-
-  ClosePack()
+  
+  ClosePack(Pack)
   
 Else
-
+  
   MessageRequester("","Data konnte nicht erstellt werden")
-
+  
 EndIf
 
 
