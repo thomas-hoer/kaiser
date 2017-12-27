@@ -12,7 +12,6 @@ Procedure Window_Demograhpie(spieler)
   window=WinOpen(250,360,"Aktuelle Demographische Daten")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,50, 20,120,20,"Einwohnerzahl:")
   TextGadget(-1,50, 60,120,20,"Zufriedenheit:")
   TextGadget(-1,50,100,120,20,"Geburtenrate:")
@@ -29,6 +28,13 @@ Procedure Window_Demograhpie(spieler)
   
   FrameGadget(-1,10,255,230,50,"Stimmung im Lande")
   
+  ImageGadget(-1,10,10,32,32,ImageID(icon(28)))
+  ImageGadget(-1,10,50,32,32,ImageID(icon(29)))
+  ImageGadget(-1,10,90,32,32,ImageID(icon(30)))
+  ImageGadget(-1,10,130,32,32,ImageID(icon(31)))
+  ImageGadget(-1,10,170,32,32,ImageID(icon(26)))
+  ImageGadget(-1,10,210,32,32,ImageID(icon(32)))
+  
   button=ButtonGadget(-1,75,320,100,30,"Fertig")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -37,23 +43,12 @@ Procedure Window_Demograhpie(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(28),WindowOutput(window),10,10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(29),WindowOutput(window),10,50,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(30),WindowOutput(window),10,90,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(31),WindowOutput(window),10,130,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(26),WindowOutput(window),10,170,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(32),WindowOutput(window),10,210,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -63,7 +58,6 @@ Procedure Window_Finanzen(spieler)
   window=WinOpen(420,310,"Staatshaushalt")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,50,10,320,40,"Eine Aufstellung der für das kommende Jahr zu erwartenden Einnahmen und Ausgaben:",#PB_Text_Center)
   FrameGadget(-1,10,50,400,150,"")
   TextGadget(-1,20, 60,270,20,"Gewinne der Märkte und Kornmühlen:")
@@ -88,6 +82,10 @@ Procedure Window_Finanzen(spieler)
   FrameGadget(-1,10,230,400,30,"")
   TextGadget(-1,20,240,270,20,"Neuer Stand in der Schatzkammer:")
   TextGadget(-1,290,240,110,20,Str(gesammt+PeekL(mem+25))+" Taler",#PB_Text_Right)
+  
+  ImageGadget(-1,10,10,32,32,ImageID(icon(24)))
+  ImageGadget(-1,378,10,32,32,ImageID(icon(24)))
+  
   button=ButtonGadget(-1,160,270,100,30,"Danke")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -96,19 +94,12 @@ Procedure Window_Finanzen(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(24),WindowOutput(window), 10,10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(24),WindowOutput(window),378,10,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -144,8 +135,9 @@ Procedure Window_Kariere(spieler)
     window=WinOpen(300,100,"Karriereberatung")
     
     mem=spieler(spieler)
-    ;CreateGadgetList(WindowID(window))
     TextGadget(-1,50,10,240,40,"Die Beförderung zum "+UCase(titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33)))+" steht unmittelbar ins Haus!")
+    ImageGadget(-1,10,10,32,32,ImageID(icon(10)))
+    
     button=ButtonGadget(-1,100,60,100,30,"Huah!")
     Repeat
       Event=WaitWindowEvent(#TimeOut)
@@ -154,18 +146,12 @@ Procedure Window_Kariere(spieler)
       EventType=EventType()
       
       Select Event
-        Case #PB_Event_Repaint
-          RePaint(EventWindow())
-          DrawTransparentImage(icon(10),WindowOutput(window),10,10,32,32,0,0,32,32,$FF00FF)
-          ;endcase
         Case #PB_Event_Gadget
           Select EventGadget
             Case button
               CloseWindow(window)
               ProcedureReturn 1
-              ;endcase
           EndSelect
-          ;endcase
       EndSelect
       
     ForEver
@@ -175,7 +161,6 @@ Procedure Window_Kariere(spieler)
     window=WinOpen(420,260,"Karriereberatung")
     
     mem=spieler(spieler)
-    ;CreateGadgetList(WindowID(window))
     TextGadget(-1,50,10,360,50,"Bedauerlicherweise erfüllt Ihr noch nicht alle nötigen Vorraussetzungen für einen gesellschaftlichen Aufstieg, lediglich die hier markierten:")
     TextGadget(-1, 50, 70,100,20,"Einwohnerzahl:")
     TextGadget(-1, 50,110,100,20,"Zufriedenheit:")
@@ -191,6 +176,15 @@ Procedure Window_Kariere(spieler)
     c5=CheckBoxGadget(-1,380, 70,20,20,"")
     c6=CheckBoxGadget(-1,380,110,20,20,"")
     c7=CheckBoxGadget(-1,380,150,20,20,"")
+    ImageGadget(-1, 10, 10,32,32,ImageID(icon(10)))
+    ImageGadget(-1, 10, 60,32,32,ImageID(icon(28)))
+    ImageGadget(-1, 10,100,32,32,ImageID(icon(29)))
+    ImageGadget(-1, 10,140,32,32,ImageID(icon( 2)))
+    ImageGadget(-1, 10,180,32,32,ImageID(icon(24)))
+    ImageGadget(-1,220, 60,32,32,ImageID(icon(33)))
+    ImageGadget(-1,220,100,32,32,ImageID(icon(17)))
+    ImageGadget(-1,220,140,32,32,ImageID(icon(18)))
+
     If vorraussetzung(PeekW(mem+84))\einwohner>PeekL(mem+17)
       SetGadgetState(c1,0)
     Else
@@ -234,26 +228,12 @@ Procedure Window_Kariere(spieler)
       EventType=EventType()
       
       Select Event
-        Case #PB_Event_Repaint
-          RePaint(EventWindow())
-          DrawTransparentImage(icon(10),WindowOutput(window), 10, 10,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(28),WindowOutput(window), 10, 60,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(29),WindowOutput(window), 10,100,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon( 2),WindowOutput(window), 10,140,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(24),WindowOutput(window), 10,180,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(33),WindowOutput(window),220, 60,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(17),WindowOutput(window),220,100,32,32,0,0,32,32,$FF00FF)
-          DrawTransparentImage(icon(18),WindowOutput(window),220,140,32,32,0,0,32,32,$FF00FF)
-          
-          ;endcase
         Case #PB_Event_Gadget
           Select EventGadget
             Case button
               CloseWindow(window)
               ProcedureReturn 1
-              ;endcase
           EndSelect
-          ;endcase
       EndSelect
       
     ForEver
@@ -290,7 +270,6 @@ Procedure Window_Vergleich(spieler)
       r6+1
     EndIf
   Next
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,60, 20,100,20,"Karriere:")
   TextGadget(-1,60, 60,100,20,"Bevölkerung:")
   TextGadget(-1,60,100,100,20,"Ländereien:")
@@ -303,6 +282,12 @@ Procedure Window_Vergleich(spieler)
   TextGadget(-1,160,140,60,20,Str(r4)+". Platz",#PB_Text_Right)
   TextGadget(-1,160,180,60,20,Str(r5)+". Platz",#PB_Text_Right)
   TextGadget(-1,160,220,60,20,Str(r6)+". Platz",#PB_Text_Right)
+  ImageGadget(-1,20, 10,32,32,ImageID(icon(10)))
+  ImageGadget(-1,20, 50,32,32,ImageID(icon(28)))
+  ImageGadget(-1,20, 90,32,32,ImageID(icon( 2)))
+  ImageGadget(-1,20,130,32,32,ImageID(icon(15)))
+  ImageGadget(-1,20,170,32,32,ImageID(icon(33)))
+  ImageGadget(-1,20,210,32,32,ImageID(icon(24)))
   button=ButtonGadget(-1,75,250,100,30,"Fertig")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -311,23 +296,12 @@ Procedure Window_Vergleich(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),20, 10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(28),WindowOutput(window),20, 50,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon( 2),WindowOutput(window),20, 90,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(15),WindowOutput(window),20,130,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(33),WindowOutput(window),20,170,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(24),WindowOutput(window),20,210,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -374,7 +348,8 @@ Procedure Window_Wetter(spieler)
       ;endcase
   EndSelect
   
-  ;CreateGadgetList(WindowID(window))
+  ImageGadget(-1,10,10,32,32,ImageID(icon(icon1)))
+  ImageGadget(-1,10,50,32,32,ImageID(icon(15)))
   TextGadget(-1,50,10,260,40,text1)
   TextGadget(-1,50,50,260,40,text2)
   button=ButtonGadget(-1,120,100,100,20,text3)
@@ -387,8 +362,6 @@ Procedure Window_Wetter(spieler)
     Select Event
       Case #PB_Event_Repaint
         RePaint(EventWindow())
-        DrawTransparentImage(icon(icon1),WindowOutput(window),10,10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(15),WindowOutput(window),10,50,32,32,0,0,32,32,$FF00FF)
         ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
@@ -437,11 +410,21 @@ Procedure Window_Geheimdienst(spieler)
   ks_3=TextGadget(-1,485,220,90,20,"",#PB_Text_Right)
   ks_4=TextGadget(-1,485,260,90,20,"",#PB_Text_Right)
   ks_5=TextGadget(-1,485,300,90,20,"",#PB_Text_Right)
-  ;CreateGadgetList(WindowID(window))
+  ImageGadget(-1,15,60,32,32,ImageID(icon(10)))
+  ImageGadget(-1,15,140,32,32,ImageID(icon(13)))
+  ImageGadget(-1,15,210,32,32,ImageID(icon(24)))
+  ImageGadget(-1,15,280,32,32,ImageID(icon(33)))
+  ImageGadget(-1,315,60,32,32,ImageID(icon(38)))
+  ImageGadget(-1,315,135,32,32,ImageID(icon(14)))
+  ImageGadget(-1,315,175,32,32,ImageID(icon(15)))
+  ImageGadget(-1,315,215,32,32,ImageID(icon(24)))
+  ImageGadget(-1,315,255,32,32,ImageID(icon(13)))
+  ImageGadget(-1,315,295,32,32,ImageID(icon(28)))
+  
   combo=ComboBoxGadget(-1,10,10,580,22)
   For x=0 To PeekB(spiel)
     If x<>spieler
-      AddGadgetItem(combo,-1,titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name)
+      AddGadgetItem(combo,-1,titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name)
     EndIf
   Next
   SetGadgetState(combo,0)
@@ -454,24 +437,11 @@ Procedure Window_Geheimdienst(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),15,60,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),15,140,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(24),WindowOutput(window),15,210,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(33),WindowOutput(window),15,280,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(38),WindowOutput(window),315,60,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(14),WindowOutput(window),315,135,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(15),WindowOutput(window),315,175,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(24),WindowOutput(window),315,215,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),315,255,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(28),WindowOutput(window),315,295,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case combo
             For x=0 To PeekB(spiel)
-              If GetGadgetText(combo)=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+              If GetGadgetText(combo)=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                 SetGadgetText(txt1,GetGadgetText(combo))
                 SetGadgetText(txt2,zauber(PeekB(spieler(x)+122))\zauber)
                 SetGadgetText(ks_1,Str(PeekL(spieler(x)+1200+spieler*20+00)))
@@ -481,14 +451,10 @@ Procedure Window_Geheimdienst(spieler)
                 SetGadgetText(ks_5,Str(PeekL(spieler(x)+1200+spieler*20+16)))
               EndIf
             Next
-            
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -499,15 +465,17 @@ EndProcedure
 ;##### ------------------------------------------------------------------------
 
 Procedure Window_About()
-  window=WinOpen(250,220,"Über Kaiser")
+  window=WinOpen(250,295,"Über Kaiser")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,50,20,190,40,#Kaiser$+FormatDate(" (%dd.%mm.%yyyy)",#PB_Compiler_Date)+#CRLF$+"by Thomas Hörmann")
-  link1=HyperLinkGadget(-1,10,60,230,20,"http://www.nipsold.de/kaiser/",$FF0000,#PB_HyperLink_Underline)
-  TextGadget(-1,10,100,230,50,"Bei diesem Spiel handelt es von dem Remake und der Weiterführung des Spiels Kaiser von Stefan Maday")
-  link2=HyperLinkGadget(-1,10,150,230,20,"http://yadam.de/KAISER/kaiser.htm",$FF0000,#PB_HyperLink_Underline)
-  button=ButtonGadget(-1,75,190,100,20,"Ok!")
+  link1=HyperLinkGadget(-1,10,60,230,20,"https://nipsold.de/kaiser/",$FF0000,#PB_HyperLink_Underline)
+  TextGadget(-1,10,100,230,35,"Dieses Spiel ist Open Source. Du findest den Quellcode unter")
+  link2=HyperLinkGadget(-1,10,135,230,20,"https://github.com/thomas-hoer/kaiser",$FF0000,#PB_HyperLink_Underline)
+  TextGadget(-1,10,175,230,50,"Bei diesem Spiel handelt es von dem Remake und der Weiterführung des Spiels Kaiser von Stefan Maday")
+  link3=HyperLinkGadget(-1,10,225,230,20,"http://yadam.de/KAISER/kaiser.htm",$FF0000,#PB_HyperLink_Underline)
+  button=ButtonGadget(-1,75,265,100,20,"Ok!")
+  ImageGadget(-1,10,20,32,32,ImageID(icon(10)))
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -515,24 +483,18 @@ Procedure Window_About()
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),10,20,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case link1
-            RunProgram("http://www.nipsold.de/kaiser/")
-            ;endcase
+            RunProgram("https://nipsold.de/kaiser/")
           Case link2
+            RunProgram("https://github.com/thomas-hoer/kaiser")
+          Case link3
             RunProgram("http://yadam.de/KAISER/kaiser.htm")
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -542,7 +504,6 @@ Procedure Window_Annale()
   window=WinOpen(550,330,"Halle des Ruhmes")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,200,20,150,20,"Die Zehn Top-Monarchen",#PB_Text_Center)
   TextGadget(-1, 50,50,230,20,"Name")
   TextGadget(-1,280,50,100,20,"Domäne")
@@ -556,6 +517,8 @@ Procedure Window_Annale()
     TextGadget(-1,380,80+x*20, 50,20,Str(PeekL(annale+92+x*100)),#PB_Text_Right)
     TextGadget(-1,430,80+x*20,100,20,Str(PeekL(annale+96+x*100)),#PB_Text_Right)
   Next
+  ImageGadget(-1,150,10,32,32,ImageID(icon(10)))
+  ImageGadget(-1,368,10,32,32,ImageID(icon(10)))
   button=ButtonGadget(-1,225,300,100,20,"Wow!")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -564,34 +527,31 @@ Procedure Window_Annale()
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),150,10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(10),WindowOutput(window),368,10,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
   
 EndProcedure
 Procedure Window_Rekorde()
-  window=WinOpen(400,370,"Her Ginness sein Buch der Rekorde")
+  window=WinOpen(400,370,"Her Guinness sein Buch der Rekorde")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,60, 20,320,60,PeekS(annale+9000)+" konnte es gar nicht erwarten und benötigte zur Krönung lediglich "+Str(PeekL(annale+9096))+" Jahre!")
   TextGadget(-1,60, 80,320,60,PeekS(annale+9100)+" verfügte mit "+Str(PeekL(annale+9196))+" ha über die größte Landmenge aller Zeiten!")
   TextGadget(-1,60,140,320,60,PeekS(annale+9200)+" gebot über die unerreichte Zahl von "+Str(PeekL(annale+9296))+" Untertanen!")
   TextGadget(-1,60,200,320,60,"Sagenhafte "+Str(PeekL(annale+9396))+" Taler betrug die Barschaft von "+PeekS(annale+9300))
   TextGadget(-1,60,260,320,70,"Der stärkste Ritter unter der Sonne ward der blutrünstige "+PeekS(annale+9400)+". Der Halbgott erschlug "+Str(PeekL(annale+9496))+" Feind(e) und diente unter "+PeekS(annale+9500))
+  ImageGadget(-1,20, 20,32,32,ImageID(icon(10)))
+  ImageGadget(-1,20, 80,32,32,ImageID(icon( 2)))
+  ImageGadget(-1,20,140,32,32,ImageID(icon(28)))
+  ImageGadget(-1,20,200,32,32,ImageID(icon(14)))
+  ImageGadget(-1,20,260,32,32,ImageID(icon( 3)))
   button=ButtonGadget(-1,150,330,100,30,"Fertig")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -600,22 +560,12 @@ Procedure Window_Rekorde()
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),20, 20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon( 2),WindowOutput(window),20, 80,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(28),WindowOutput(window),20,140,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(24),WindowOutput(window),20,200,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon( 3),WindowOutput(window),20,260,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver

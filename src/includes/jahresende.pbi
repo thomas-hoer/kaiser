@@ -66,6 +66,12 @@ Procedure Window_Befoerderung(spieler)
   TextGadget(-1,100,120,140,20,UCase(titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33))),#PB_Text_Center)
   TextGadget(-1,50,150,240,40,"tragen und gelobte hoch und heilig, sich dieser Bürde stets würdig zu erweisen.",#PB_Text_Center)
   
+  ImageGadget(-1, 10, 10,32,32,ImageID(icon(11)))
+  ImageGadget(-1, 10,198,32,32,ImageID(icon(11)))
+  ImageGadget(-1,298, 10,32,32,ImageID(icon(11)))
+  ImageGadget(-1,298,198,32,32,ImageID(icon(11)))
+  ImageGadget(-1, 60,110,32,32,ImageID(icon(10)))
+  ImageGadget(-1,248,110,32,32,ImageID(icon(10)))
   button=ButtonGadget(-1,100,200,140,30,"Kier konsolodieren")
   
   PokeL(mem+34,PeekL(mem+34)+10)
@@ -82,16 +88,6 @@ Procedure Window_Befoerderung(spieler)
     EventType=EventType()
     
     Select Event
-        
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(11),WindowOutput(window), 10, 10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window), 10,198,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window),298, 10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window),298,198,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(10),WindowOutput(window), 60,110,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(10),WindowOutput(window),248,110,32,32,0,0,32,32,$FF00FF)
-        
       Case #PB_Event_Gadget
         
         Select EventGadget
@@ -123,7 +119,11 @@ Procedure Window_Befoerderung_Kaiser(spieler)
   TextGadget(-1,20,240,300,60,"Während Euer Name in die ewigen Annalen eingehen wird, werden Eure Nebenbuhler bald der Vergessenheit anheim gefallen sein!",#PB_Text_Center)
   
   button=ButtonGadget(-1,100,300,140,30,"Fin")
-  
+  ImageGadget(-1, 10, 10,32,32,ImageID(icon(10)))
+  ImageGadget(-1, 10,298,32,32,ImageID(icon(11)))
+  ImageGadget(-1,298, 10,32,32,ImageID(icon(10)))
+  ImageGadget(-1,298,298,32,32,ImageID(icon(11)))
+  ImageGadget(-1,110,115,120,116,ImageID(krone))
   PokeL(mem+34,PeekL(mem+34)+10)
   
   If PeekL(mem+34)>100
@@ -138,14 +138,6 @@ Procedure Window_Befoerderung_Kaiser(spieler)
     EventType=EventType()
     
     Select Event
-        
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window), 10, 10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window), 10,298,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(10),WindowOutput(window),298, 10,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window),298,298,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(krone,WindowOutput(window),110,115,120,116,0,0,120,116,$FF00FF)
         
       Case #PB_Event_Gadget
         Select EventGadget
@@ -163,29 +155,29 @@ Procedure Window_Befoerderung_Kaiser(spieler)
             punkte+(PeekL(mem+25)-1000000)/400;obligatorische taler
             
             If PeekL(annale+9096)>PeekW(spiel+1)-1400
-              PokeS(annale+9000,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+              PokeS(annale+9000,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9096,PeekW(spiel+1)-1400)
             EndIf
             
             If PeekL(annale+9196)<PeekL(mem+21)
-              PokeS(annale+9100,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+              PokeS(annale+9100,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9196,PeekL(mem+21))
             EndIf
             
             If PeekL(annale+9296)<PeekL(mem+17)
-              PokeS(annale+9200,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+              PokeS(annale+9200,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9296,PeekL(mem+17))
             EndIf
             
             If PeekL(annale+9396)<PeekL(mem+25)
-              PokeS(annale+9300,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+              PokeS(annale+9300,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9396,PeekL(mem+25))
             EndIf
             
             For x=0 To 9
               If punkte>PeekL(annale+96+(x*100))
                 CopyMemory(annale+(x*100),annale+(x*100)+100,(9-x)*100)
-                PokeS(annale+(x*100),titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+                PokeS(annale+(x*100),titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
                 PokeL(annale+88+(x*100),PeekB(mem+122))
                 PokeL(annale+92+(x*100),PeekW(spiel+1))
                 PokeL(annale+96+(x*100),punkte)
@@ -394,7 +386,7 @@ Procedure NextTurn()
       
       ;{ nur menschliche spieler
       Window_Begruesung(spieler)
-      SetWindowTitle(MainWindow,"Kaiser - "+titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+      SetWindowTitle(MainWindow,"Kaiser - "+titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
       
       If PeekB(spieler(spieler)+123)=0
         ;{ spielbeginn

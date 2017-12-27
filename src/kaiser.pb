@@ -22,7 +22,7 @@ Procedure OpenMainWindow(LoadGame.s)
   
   MainWindow = OpenWindow(#PB_Any,0,0,640,480,"Kaiser",Flags)
   
-  MainImage = CreateImage(#PB_Any,640-25,480)
+  MainImage = CreateImage(#PB_Any,640-25,480,32)
   
   CreateMenu(0,WindowID(MainWindow));{
   
@@ -163,7 +163,7 @@ Procedure OpenMainWindow(LoadGame.s)
             spende.s=Window_Spende(PeekB(spiel+3))
             If spende
               For x=0 To PeekB(spiel)
-                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -187,7 +187,7 @@ Procedure OpenMainWindow(LoadGame.s)
             abkommen.s=Window_Abkommen(PeekB(spiel+3))
             If abkommen
               For x=0 To PeekB(spiel)
-                If abkommen=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If abkommen=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -221,7 +221,7 @@ Procedure OpenMainWindow(LoadGame.s)
             spende.s=Window_Erpressen(PeekB(spiel+3))
             If spende
               For x=0 To PeekB(spiel)
-                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -261,7 +261,7 @@ Procedure OpenMainWindow(LoadGame.s)
             krieg.s=Window_Krieg(PeekB(spiel+3))
             If krieg
               For x=0 To PeekB(spiel)
-                If krieg=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If krieg=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -352,7 +352,7 @@ Procedure OpenMainWindow(LoadGame.s)
             spende.s=Window_Spende(PeekB(spiel+3))
             If spende
               For x=0 To PeekB(spiel)
-                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -377,7 +377,7 @@ Procedure OpenMainWindow(LoadGame.s)
             abkommen.s=Window_Abkommen(PeekB(spiel+3))
             If abkommen
               For x=0 To PeekB(spiel)
-                If abkommen=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If abkommen=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -411,7 +411,7 @@ Procedure OpenMainWindow(LoadGame.s)
             spende.s=Window_Erpressen(PeekB(spiel+3))
             If spende
               For x=0 To PeekB(spiel)
-                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If spende=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -452,7 +452,7 @@ Procedure OpenMainWindow(LoadGame.s)
             krieg.s=Window_Krieg(PeekB(spiel+3))
             If krieg
               For x=0 To PeekB(spiel)
-                If krieg=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16)+" von "+land(PeekB(spieler(x)+124))\name
+                If krieg=titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name
                   Break
                 EndIf
               Next
@@ -550,10 +550,3 @@ EndProcedure
 OpenMainWindow(ProgramParameter())
 
 Programm_Beenden()
-; IDE Options = PureBasic 4.40 (Windows - x86)
-; CursorPosition = 502
-; FirstLine = 146
-; Folding = B+A-
-; UseIcon = icon.ico
-; Executable = Kaiser.exe
-; CompileSourceDirectory

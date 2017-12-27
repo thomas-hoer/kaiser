@@ -96,8 +96,6 @@ DataSection
   Data.i 5000,90,50000,100000,0,12,0
   Data.i 10000,95,100000,1000000,0,12,12
   
-  Standard_Namen:
-  Data.s "Rolandbert","Helmbrand","Ludwig","Theodorich","Friedrich","Burgfried","Willhelm","Bertram","Pernhard","Harald"
   
   map1:
   Data.l 54,54,54,54,54,54,54,54,54,54,54,54,52,54,52

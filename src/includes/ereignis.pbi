@@ -13,7 +13,6 @@ Procedure Window_Ereignis_Soeldner1(spieler)
   sold      =20
   spezial   =100
   bild      =100
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,10,10,200,60,"Eine Einheit Söldner kam heuer von weit her in unser Land und bot Euch ihre Dienste an:")
   TextGadget(-1,50,70,120,40,name+#CRLF$+spezial(spezial),#PB_Text_Center)
   TextGadget(-1,10,110,60,15,"Angriff:")
@@ -29,7 +28,8 @@ Procedure Window_Ereignis_Soeldner1(spieler)
   TextGadget(-1,170,125,30,15,Str(schritte),#PB_Text_Right)
   TextGadget(-1,140,140,60,15,Str(sold),#PB_Text_Right)
   TextGadget(-1,10,160,200,40,"Wollt Ihr die Einheit Eurer glorreichen Armee hinzufügen?")
-  
+  ImageGadget(-1,10,70,32,32,ImageID(icon(ehicon(bild,0))))
+  ImageGadget(-1,178,70,32,32,ImageID(icon(33)))
   button=ButtonGadget(-1,20,200,80,20,"Ja")
   abbrechen=ButtonGadget(-1,120,200,80,20,"Nein")
   PokeW(mem+46,PeekW(mem+46)+2)
@@ -39,26 +39,16 @@ Procedure Window_Ereignis_Soeldner1(spieler)
     EventGadget=EventGadget()
     EventType=EventType()
     Select Event
-      Case #PB_Event_Repaint
-        If EventWindow()=0
-          Paint0()
-        EndIf
-        DrawTransparentImage(icon(ehicon(bild,0)),WindowOutput(window),10,70,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(33),WindowOutput(window),178,70,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             AddEinheit(spieler,name,angriff,abwehr,treffer,schritte,reichweite,salven,sold,spezial,bild)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn 0
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -77,7 +67,6 @@ Procedure Window_Ereignis_Soeldner2(spieler)
   sold      =960
   spezial   =101
   bild      =101
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,10,10,200,60,"Eine Einheit Söldner kam heuer von weit her in unser Land und bot Euch ihre Dienste an:")
   TextGadget(-1,50,70,120,40,name+#CRLF$+spezial(spezial),#PB_Text_Center)
   TextGadget(-1,10,110,60,15,"Angriff:")
@@ -93,7 +82,8 @@ Procedure Window_Ereignis_Soeldner2(spieler)
   TextGadget(-1,170,125,30,15,Str(schritte),#PB_Text_Right)
   TextGadget(-1,140,140,60,15,Str(sold),#PB_Text_Right)
   TextGadget(-1,10,160,200,40,"Wollt Ihr die Einheit Eurer glorreichen Armee hinzufügen?")
-  
+  ImageGadget(-1,10,70,32,32,ImageID(icon(ehicon(bild,0))))
+  ImageGadget(-1,178,70,32,32,ImageID(icon(33)))
   button=ButtonGadget(-1,20,200,80,20,"Ja")
   abbrechen=ButtonGadget(-1,120,200,80,20,"Nein")
   PokeW(mem+46,PeekW(mem+46)+2)
@@ -103,26 +93,16 @@ Procedure Window_Ereignis_Soeldner2(spieler)
     EventGadget=EventGadget()
     EventType=EventType()
     Select Event
-      Case #PB_Event_Repaint
-        If EventWindow()=0
-          Paint0()
-        EndIf
-        DrawTransparentImage(icon(ehicon(bild,0)),WindowOutput(window),10,70,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(33),WindowOutput(window),178,70,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             AddEinheit(spieler,name,angriff,abwehr,treffer,schritte,reichweite,salven,sold,spezial,bild)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn 0
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -141,7 +121,6 @@ Procedure Window_Ereignis_Vampir(spieler)
   sold      =0
   spezial   =102
   bild      =110
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,10,10,200,60,"Eine Schar seltsamer Fremder kam heuer aus dem Osten in unser Land, um Euch zu dienen!")
   TextGadget(-1,50,70,120,40,name+#CRLF$+spezial(spezial),#PB_Text_Center)
   TextGadget(-1,10,110,60,15,"Angriff:")
@@ -157,7 +136,8 @@ Procedure Window_Ereignis_Vampir(spieler)
   TextGadget(-1,170,125,30,15,Str(schritte),#PB_Text_Right)
   TextGadget(-1,140,140,60,15,Str(sold),#PB_Text_Right)
   TextGadget(-1,10,160,200,40,"Eure Untertanen sind entsetzt ob des Anblicks dieser Gestalten")
-  
+  ImageGadget(-1,10,70,32,32,ImageID(ehicon(bild,0)))
+  ImageGadget(-1,178,70,32,32,ImageID(icon(33)))
   button=ButtonGadget(-1,70,200,80,20,"Fein")
   PokeW(mem+46,PeekW(mem+46)+2)
   Repeat
@@ -166,26 +146,16 @@ Procedure Window_Ereignis_Vampir(spieler)
     EventGadget=EventGadget()
     EventType=EventType()
     Select Event
-      Case #PB_Event_Repaint
-        If EventWindow()=0
-          Paint0()
-        EndIf
-        DrawTransparentImage(icon(ehicon(bild,0)),WindowOutput(window),10,70,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(33),WindowOutput(window),178,70,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             AddEinheit(spieler,name,angriff,abwehr,treffer,schritte,reichweite,salven,sold,spezial,bild)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn 0
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -319,17 +289,10 @@ Procedure.i Zufallsereignis(Spieler)
         Button = ButtonGadget(#PB_Any,100,190,100,20,Ereignis(Ereignis)\Button)
     EndSelect
     
-    
+    ImageGadget(-1,10,10,32,32,ImageID(icon(Ereignis(Ereignis)\Icon)))
     Repeat
       
       Event = WaitWindowEvent(2)
-      
-      If Event = #PB_Event_Repaint
-        If EventWindow()=0
-          Paint0()
-        EndIf
-        DrawTransparentImage(Icon(Ereignis(Ereignis)\Icon),WindowOutput(Win),10,10,32,32,0,0,32,32,$FF00FF)
-      EndIf
       
       If Event = #PB_Event_Gadget
         If EventGadget() = Button

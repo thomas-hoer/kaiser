@@ -4,20 +4,6 @@
 ;##### 
 ;##### ------------------------------------------------------------------------
 
-Procedure DrawTImage(outputDC,image,x,y,transcolor=-1) 
-  If transcolor = -1
-    transcolor = $FF00FF
-  EndIf
-  
-  image=CopyImage(image,-1)
-  id=ImageID(image) 
-  imglist=ImageList_Create_(ImageWidth(image),ImageHeight(image),#ILC_COLORDDB|#ILC_MASK,1,0) 
-  ImageList_AddMasked_(imglist,id,transcolor) 
-  ImageList_Draw_(imglist,0,outputDC,x,y,#ILD_TRANSPARENT) 
-  ImageList_Destroy_(imglist) 
-  FreeImage(image)
-EndProcedure
-
 Procedure DrawTransparentImage(TransImage,ZielOutput,x,y,b,h,offx,offy,offb,offh,TransColor) 
   ImageOutput=ImageOutput(TransImage)
   If ImageOutput
@@ -139,7 +125,7 @@ Procedure.i Paint0()
       
       If \Name <> ""
         
-        DrawingMode(#PB_2DDrawing_Transparent)
+        DrawingMode(#PB_2DDrawing_Transparent|#PB_2DDrawing_AlphaBlend)
         FrontColor(RGBA(0,0,0,255))
         DrawingFont(FontID(Fonts(0)))
         
@@ -167,28 +153,27 @@ Procedure.i Paint0()
       DrawImage(ImageID(schloss(\Schloss)),xoff + 511,10,120,80)
       DrawImage(ImageID(kathedrale(\Kathedrale)),xoff + 511,100,120,80)
       For x=1 To \Maerkte
-        DrawTImage(DC,icon(14),xoff + markt(x)\x,markt(x)\y,$FF00FF)
+        DrawImage(ImageID(icon(14)),xoff + markt(x)\x,markt(x)\y)
         If x>6
           Break
         EndIf
       Next x
       For x=1 To \Muehlen
-        DrawTImage(dc,icon(15),xoff + muehle(x)\x,muehle(x)\y,$FF00FF)
+        DrawImage(ImageID(icon(15)),xoff + muehle(x)\x,muehle(x)\y)
         If x>5
           Break
         EndIf
       Next x
       If \Schloss
-        DrawTImage(dc,icon(17),xoff + 280,159,$FF00FF)
+        DrawImage(ImageID(icon(17)),xoff + 280,159)
       EndIf
       If \Kathedrale
-        DrawTImage(dc,icon(18),xoff + 280,223,$FF00FF)
+        DrawImage(ImageID(icon(18)),xoff + 280,223)
       EndIf
       
       For x=0 To 7
         If PeekB(mem+200+(x*100)+64)
-          ;DrawTImage(dc,icon(ehicon(PeekL(mem+200+(x*100)+64),0)),xoff + 468-(x*32),448,$FF00FF)
-          DrawTImage(DC,Icon(EhIcon(\Einheit[x]\Bild,0)),xoff + 468-(x*32),448,$FF00FF)
+          DrawImage(ImageID(Icon(EhIcon(\Einheit[x]\Bild,0))),xoff + 468-(x*32),448)
         EndIf
       Next
       
@@ -207,9 +192,3 @@ Procedure.i RePaint(Window.i)
   EndIf
 EndProcedure
 
-; IDE Options = PureBasic 4.41 RC 1 (Windows - x86)
-; CursorPosition = 22
-; Folding = A+
-; EnableXP
-; CurrentDirectory = D:\Projekt\MyEd\
-; CompileSourceDirectory

@@ -195,8 +195,16 @@ For i=0 To 9
 Next i
 
 ; Standartnamen für die Spieler
-Restore Standard_Namen
-For i=0 To 9 : Read.s namen(i) : Next i
+namen(0)="Rolandbert"
+namen(1)="Helmbrand"
+namen(2)="Ludwig"
+namen(3)="Theodorich"
+namen(4)="Friedrich"
+namen(5)="Burgfried"
+namen(6)="Willhelm"
+namen(7)="Bertram"
+namen(8)="Pernhard"
+namen(9)="Harald"
 
 ; Ereignisverwaltung
 Restore Ereignisse
@@ -234,7 +242,7 @@ ehicon(110,0)=62;vampir
 ehicon(111,0)=85;miliz
 
 ; Standart Miliz
-PokeS(miliz+ 0,"Miliz",16)
+PokeS(miliz+ 0,"Miliz",16,#PB_Ascii)
 PokeL(miliz+16,1)
 PokeL(miliz+20,1)
 PokeL(miliz+24,2)

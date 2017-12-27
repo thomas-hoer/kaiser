@@ -88,7 +88,6 @@ Procedure Window_Kornverteilen(spieler)
   window=WinOpen(450,280,"Kornverteilung")
   
   mem=spieler(spieler)
-  ;;;CreateGadgetList(WindowID(window))
   FrameGadget(-1,10,10,90,260,"Verkauf")
   b11=ButtonGadget(-1,20, 30,70,30,"-100000")
   b12=ButtonGadget(-1,20, 70,70,30,"-10000")
@@ -129,6 +128,24 @@ Procedure Window_Kornverteilen(spieler)
   track=TrackBarGadget(-1,120,220,150,20,PeekL(mem+17)*0.5,PeekL(mem+17)*5.3)
   zuteilung=TextGadget(-1,280,220,50,15,Str(PeekL(mem+131)),#PB_Text_Right)
   SetGadgetState(track,PeekL(mem+131))
+  
+  kornverteilung = CanvasGadget(-1,110,20,89,178)
+  If PeekL(mem+17)
+    fill=PeekL(mem+29)*178/(PeekL(mem+17)*5)
+  Else
+    fill=Random(178)
+  EndIf
+  If fill>178
+    fill=178
+  ElseIf fill<0
+    fill=0
+  EndIf
+  StartDrawing(CanvasOutput(kornverteilung))
+  DrawImage(ImageID(korn1),0,0)
+  ClipOutput(0,178-fill,89,fill)
+  DrawImage(ImageID(korn2),0,0)
+  StopDrawing()
+  
   If PeekL(mem+29)<GetGadgetState(track)
     SetGadgetState(track,PeekL(mem+29))
     SetGadgetText(zuteilung,Str(PeekL(mem+29)))
@@ -162,20 +179,10 @@ Procedure Window_Kornverteilen(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        ;DrawTransparentImage(korn1,WindowOutput(window),110,20,89,178,0,0,89,178,$FF00FF)
-        ;DrawTransparentImage(korn2,WindowOutput(window),110,20+(178-fill),89,fill,0,178-fill,89,fill,$FF00FF)
-        StartDrawing(WindowOutput(window))
-        DrawImage(ImageID(korn1),110,20)
-        StopDrawing()
-        DrawTransparentImage(korn2,WindowOutput(window),110,20+(178-fill),89,fill,0,178-fill,89,fill,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case b11,b12,b13,b14,b15,b21,b22,b23,b24,b25
             PlaySound(sounds(10))
-            ;endcase
         EndSelect
         Select EventGadget
           Case b11
@@ -183,58 +190,47 @@ Procedure Window_Kornverteilen(spieler)
               PokeL(mem+29,PeekL(mem+29)-100000)
               PokeL(mem+25,PeekL(mem+25)+(PeekB(mem+37)*1000/2))
             EndIf
-            ;endcase
           Case b12
             If PeekL(mem+29)>=10000+PeekL(mem+17)*0.5
               PokeL(mem+29,PeekL(mem+29)-10000)
               PokeL(mem+25,PeekL(mem+25)+(PeekB(mem+37)*100/2))
             EndIf
-            ;endcase
           Case b13
             If PeekL(mem+29)>=1000+PeekL(mem+17)*0.5
               PokeL(mem+29,PeekL(mem+29)-1000)
               PokeL(mem+25,PeekL(mem+25)+(PeekB(mem+37)*10/2))
             EndIf
-            ;endcase
           Case b14
             If PeekL(mem+29)>=100+PeekL(mem+17)*0.5
               PokeL(mem+29,PeekL(mem+29)-100)
               PokeL(mem+25,PeekL(mem+25)+(PeekB(mem+37)*1/2))
             EndIf
-            ;endcase
           Case b21
             If PeekL(mem+80)>=PeekL(mem+29)+100000 And PeekL(mem+25)-(PeekB(mem+37)*1000)>-(PeekL(mem+17)*10)
               PokeL(mem+29,PeekL(mem+29)+100000)
               PokeL(mem+25,PeekL(mem+25)-(PeekB(mem+37)*1000))
             EndIf
-            ;endcase
           Case b22
             If PeekL(mem+80)>=PeekL(mem+29)+10000 And PeekL(mem+25)-(PeekB(mem+37)*100)>-(PeekL(mem+17)*10)
               PokeL(mem+29,PeekL(mem+29)+10000)
               PokeL(mem+25,PeekL(mem+25)-(PeekB(mem+37)*100))
             EndIf
-            ;endcase
           Case b23
             If PeekL(mem+80)>=PeekL(mem+29)+1000 And PeekL(mem+25)-(PeekB(mem+37)*10)>-(PeekL(mem+17)*10)
               PokeL(mem+29,PeekL(mem+29)+1000)
               PokeL(mem+25,PeekL(mem+25)-(PeekB(mem+37)*10))
             EndIf
-            ;endcase
           Case b24
             If PeekL(mem+80)>=PeekL(mem+29)+100 And PeekL(mem+25)-(PeekB(mem+37)*1)>-(PeekL(mem+17)*10)
               PokeL(mem+29,PeekL(mem+29)+100)
               PokeL(mem+25,PeekL(mem+25)-(PeekB(mem+37)*1))
             EndIf
-            ;endcase
           Case b31
             SetGadgetState(track,PeekL(mem+17)*0.5)
-            ;endcase
           Case b32
             SetGadgetState(track,PeekL(mem+17)*5)
-            ;endcase
           Case b33
             SetGadgetState(track,PeekL(mem+17)*5.3)
-            ;endcase
           Case button
             PokeL(mem+131,GetGadgetState(track))
             If GetGadgetState(track)<PeekL(mem+17)*5
@@ -251,7 +247,6 @@ Procedure Window_Kornverteilen(spieler)
             PokeW(mem+88,sterbe)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
         If PeekL(mem+29)<PeekL(mem+17)*5
           DisableGadget(b32,1)
@@ -280,9 +275,11 @@ Procedure Window_Kornverteilen(spieler)
         ElseIf fill<0
           fill=0
         EndIf
-        DrawTransparentImage(korn1,WindowOutput(window),110,20,89,178,0,0,89,178,$FF00FF)
-        DrawTransparentImage(korn2,WindowOutput(window),110,20+(178-fill),89,fill,0,178-fill,89,fill,$FF00FF)
-        ;endcase
+        StartDrawing(CanvasOutput(kornverteilung))
+        DrawImage(ImageID(korn1),0,0)
+        ClipOutput(0,178-fill,89,fill)
+        DrawImage(ImageID(korn2),0,0)
+        StopDrawing()
     EndSelect
     
   ForEver
@@ -292,7 +289,6 @@ Procedure Window_Landkauf(spieler)
   window=WinOpen(380,240,"An- und Verkauf von Land")
   
   mem=spieler(spieler)
-  ;;CreateGadgetList(WindowID(window))
   
   FrameGadget(-1,10,10,90,220,"Verkauf")
   b11=ButtonGadget(-1,20, 30,70,30,"-10000")
@@ -316,6 +312,11 @@ Procedure Window_Landkauf(spieler)
   verfuegbar=TextGadget(-1,200,110,60,20,Str(PeekL(spiel+4)),#PB_Text_Right)
   TextGadget(-1,200,130,60,20,Str(PeekB(mem+36)),#PB_Text_Right)
   button=ButtonGadget(-1,140,190,100,30,"Fertig")
+  ImageGadget(-1,110,20,32,32,ImageID(icon(13)))
+  ImageGadget(-1,142,20,32,32,ImageID(icon(13)))
+  ImageGadget(-1,174,20,32,32,ImageID(icon(13)))
+  ImageGadget(-1,206,20,32,32,ImageID(icon(13)))
+  ImageGadget(-1,238,20,32,32,ImageID(icon(13)))
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -323,19 +324,10 @@ Procedure Window_Landkauf(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(13),WindowOutput(window),110,20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),142,20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),174,20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),206,20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(13),WindowOutput(window),238,20,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case b11,b12,b13,b14,b15,b21,b22,b23,b24,b25
             PlaySound(sounds(10))
-            ;endcase
         EndSelect
         Select EventGadget
           Case b11
@@ -344,80 +336,68 @@ Procedure Window_Landkauf(spieler)
               PokeL(mem+21, PeekL(mem+21) -10000)
               PokeL(mem+25, PeekL(mem+25)+(1000*(PeekB(mem+36)-1)))
             EndIf
-            ;endcase
           Case b12
             If PeekL(mem+21)>=3000
               PokeL(spiel+4,PeekL(spiel+4)+1000)
               PokeL(mem+21, PeekL(mem+21) -1000)
               PokeL(mem+25, PeekL(mem+25)+(100*(PeekB(mem+36)-1)))
             EndIf
-            ;endcase
           Case b13
             If PeekL(mem+21)>=2100
               PokeL(spiel+4,PeekL(spiel+4)+100)
               PokeL(mem+21, PeekL(mem+21) -100)
               PokeL(mem+25, PeekL(mem+25)+(10*(PeekB(mem+36)-1)))
             EndIf
-            ;endcase
           Case b14
             If PeekL(mem+21)>=2010
               PokeL(spiel+4,PeekL(spiel+4)+10)
               PokeL(mem+21, PeekL(mem+21) -10)
               PokeL(mem+25, PeekL(mem+25)+(1*(PeekB(mem+36)-1)))
             EndIf
-            ;endcase
           Case b15
             If PeekL(mem+21)>=2001
               PokeL(spiel+4,PeekL(spiel+4)+1)
               PokeL(mem+21, PeekL(mem+21) -1)
               PokeL(mem+25, PeekL(mem+25)+Round(0.1*(PeekB(mem+36)-1),#PB_Round_Down))
             EndIf
-            ;endcase
           Case b21
             If PeekL(spiel+4)>10000  And PeekL(mem+25)-(1000*(PeekB(mem+36)))>-(PeekL(mem+17)*10)
               PokeL(spiel+4,PeekL(spiel+4)-10000)
               PokeL(mem+21, PeekL(mem+21) +10000)
               PokeL(mem+25, PeekL(mem+25)-(1000*(PeekB(mem+36))))
             EndIf
-            ;endcase
           Case b22
             If PeekL(spiel+4)>1000  And PeekL(mem+25)-(100*(PeekB(mem+36)))>-(PeekL(mem+17)*10)
               PokeL(spiel+4,PeekL(spiel+4)-1000)
               PokeL(mem+21, PeekL(mem+21) +1000)
               PokeL(mem+25, PeekL(mem+25)-(100*(PeekB(mem+36))))
             EndIf
-            ;endcase
           Case b23
             If PeekL(spiel+4)>100  And PeekL(mem+25)-(10*(PeekB(mem+36)))>-(PeekL(mem+17)*10)
               PokeL(spiel+4,PeekL(spiel+4)-100)
               PokeL(mem+21, PeekL(mem+21) +100)
               PokeL(mem+25, PeekL(mem+25)-(10*(PeekB(mem+36))))
             EndIf
-            ;endcase
           Case b24
             If PeekL(spiel+4)>10  And PeekL(mem+25)-(1*(PeekB(mem+36)))>-(PeekL(mem+17)*10)
               PokeL(spiel+4,PeekL(spiel+4)-10)
               PokeL(mem+21, PeekL(mem+21) +10)
               PokeL(mem+25, PeekL(mem+25)-(1*(PeekB(mem+36))))
             EndIf
-            ;endcase
           Case b25
             If PeekL(spiel+4)>10  And PeekL(mem+25)-Round(0.1*(PeekB(mem+36)),#PB_Round_Up)>-(PeekL(mem+17)*10)
               PokeL(spiel+4,PeekL(spiel+4)-1)
               PokeL(mem+21, PeekL(mem+21) +1)
               PokeL(mem+25, PeekL(mem+25)-Round(0.1*(PeekB(mem+36)),#PB_Round_Up))
             EndIf
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
         SetGadgetText(taler,Str(PeekL(mem+25)))
         SetGadgetText(land,Str(PeekL(mem+21)))
         SetGadgetText(verfuegbar,Str(PeekL(spiel+4)))
         
-        ;endcase
     EndSelect
     
   ForEver
@@ -427,7 +407,6 @@ Procedure Window_Bauwerke(spieler)
   window=WinOpen(450,350,"Kauf von Bauwerken")
   
   mem=spieler(spieler)
-  ;;CreateGadgetList(WindowID(window))
   FrameGadget(-1,20,20,130,100,"Marktplatz")
   TextGadget(-1,70,40,60,20,"1000 Taler")
   TextGadget(-1,70,60,40,20,"Besitz:")
@@ -469,6 +448,12 @@ Procedure Window_Bauwerke(spieler)
   taler=TextGadget(-1,90,270,50,20,Str(PeekL(mem+25)),#PB_Text_Right)
   TextGadget(-1,150,270,60,20,"Bauland ha:")
   land=TextGadget(-1,210,270,60,20,Str(PeekL(mem+21)),#PB_Text_Right)
+  ImageGadget(-1, 30, 40,32,32,ImageID(icon(14)))
+  ImageGadget(-1,170, 40,32,32,ImageID(icon(15)))
+  ImageGadget(-1,310, 40,32,32,ImageID(icon(16)))
+  ImageGadget(-1, 30,160,32,32,ImageID(icon(17)))
+  ImageGadget(-1,170,160,32,32,ImageID(icon(18)))
+  ImageGadget(-1,310,160,32,32,ImageID(icon(19)))
   
   button=ButtonGadget(-1,170,310,110,30,"Fertig")
   Repeat
@@ -478,20 +463,10 @@ Procedure Window_Bauwerke(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(14),WindowOutput(window), 30, 40,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(15),WindowOutput(window),170, 40,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(16),WindowOutput(window),310, 40,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(17),WindowOutput(window), 30,160,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(18),WindowOutput(window),170,160,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(19),WindowOutput(window),310,160,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case markt2,muehle2,speicher2,lager2,palast2,kathedrale2
             PlaySound(sounds(10))
-            ;endcase
         EndSelect
         
         Select EventGadget
@@ -500,46 +475,39 @@ Procedure Window_Bauwerke(spieler)
               PokeW(mem+46,PeekW(mem+46)+1)
               PokeL(mem+25,PeekL(mem+25)-1000)
             EndIf
-            ;endcase
           Case muehle2
             If PeekW(mem+48)<PeekL(mem+21)/1000 And PeekL(mem+25)-2000>-(PeekL(mem+17)*10)
               PokeW(mem+48,PeekW(mem+48)+1)
               PokeL(mem+25,PeekL(mem+25)-2000)
               PokeL(mem+80,PeekL(mem+80)+2000)
             EndIf
-            ;endcase
           Case speicher2
             If PeekW(mem+50)<PeekL(mem+21)/1000 And PeekL(mem+25)-2500>-(PeekL(mem+17)*10)
               PokeW(mem+50,PeekW(mem+50)+1)
               PokeL(mem+25,PeekL(mem+25)-2500)
               PokeL(mem+80,PeekL(mem+80)+10000)
             EndIf
-            ;endcase
           Case lager2
             If PeekW(mem+52)<PeekL(mem+21)/1000 And PeekL(mem+25)-4000>-(PeekL(mem+17)*10)
               PokeW(mem+52,PeekW(mem+52)+1)
               PokeL(mem+25,PeekL(mem+25)-4000)
               PokeL(mem+56,PeekL(mem+56)+1000)
             EndIf
-            ;endcase
           Case palast2
             If PeekB(mem+54)<12 And PeekB(mem+125)=0 And PeekL(mem+25)-5000>-(PeekL(mem+17)*10)
               PokeB(mem+125,1)
               PokeB(mem+54,PeekB(mem+54)+1)
               PokeL(mem+25,PeekL(mem+25)-5000)
             EndIf
-            ;endcase
           Case kathedrale2
             If PeekB(mem+55)<12 And PeekW(mem+84)=9 And PeekB(mem+126)=0 And PeekL(mem+25)-9000>-(PeekL(mem+17)*10)
               PokeB(mem+126,1)
               PokeB(mem+55,PeekB(mem+55)+1)
               PokeL(mem+25,PeekL(mem+25)-9000)
             EndIf
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
         SetGadgetText(markt,Str(PeekW(mem+46)))
         SetGadgetText(muehle,Str(PeekW(mem+48)))
@@ -550,7 +518,6 @@ Procedure Window_Bauwerke(spieler)
         SetGadgetText(taler,Str(PeekL(mem+25)))
         SetGadgetText(land,Str(PeekL(mem+21)))
         
-        ;endcase
     EndSelect
     
   ForEver
@@ -560,7 +527,6 @@ Procedure Window_Verkaufen(spieler)
   window=WinOpen(450,320,"Güter verkaufen")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,120,20,60,20,"Preis",#PB_Text_Right)
   TextGadget(-1,180,20,60,20,"Last",#PB_Text_Right)
   TextGadget(-1,380,20,60,20,"Verkaufen",#PB_Text_Right)
@@ -596,6 +562,12 @@ Procedure Window_Verkaufen(spieler)
   TextGadget(-1,260,235,60,20,"Taler:")
   taler=TextGadget(-1,320,235,60,20,Str(PeekL(mem+25)),#PB_Text_Right)
   button=ButtonGadget(-1,175,270,100,30,"So soll es sein!")
+  
+  ImageGadget(-1,20, 50,32,32,ImageID(icon(20)))
+  ImageGadget(-1,20, 90,32,32,ImageID(icon(21)))
+  ImageGadget(-1,20,130,32,32,ImageID(icon(22)))
+  ImageGadget(-1,20,170,32,32,ImageID(icon(23)))
+  
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -603,13 +575,6 @@ Procedure Window_Verkaufen(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(20),WindowOutput(window),20, 50,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(21),WindowOutput(window),20, 90,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(22),WindowOutput(window),20,130,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(23),WindowOutput(window),20,170,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case t1
@@ -617,29 +582,24 @@ Procedure Window_Verkaufen(spieler)
             PokeL(mem+56,PeekL(mem+56)+verkauf)
             PokeL(mem+25,PeekL(mem+25)+(verkauf*PeekW(mem+38)))
             PokeL(mem+60,PeekL(mem+60)-verkauf)
-            ;endcase
           Case t2
             verkauf=GetGadgetState(t2)-Val(GetGadgetText(v2))
             PokeL(mem+56,PeekL(mem+56)+verkauf)
             PokeL(mem+25,PeekL(mem+25)+(verkauf*PeekW(mem+40)))
             PokeL(mem+64,PeekL(mem+64)-verkauf)
-            ;endcase
           Case t3
             verkauf=GetGadgetState(t3)-Val(GetGadgetText(v3))
             PokeL(mem+56,PeekL(mem+56)+verkauf)
             PokeL(mem+25,PeekL(mem+25)+(verkauf*PeekW(mem+42)))
             PokeL(mem+68,PeekL(mem+68)-verkauf)
-            ;endcase
           Case t4
             verkauf=GetGadgetState(t4)-Val(GetGadgetText(v4))
             PokeL(mem+56,PeekL(mem+56)+verkauf)
             PokeL(mem+25,PeekL(mem+25)+(verkauf*PeekW(mem+44)))
             PokeL(mem+72,PeekL(mem+72)-verkauf)
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
         SetGadgetText(v1,Str(GetGadgetState(t1)))
         SetGadgetText(l1,Str(GetGadgetAttribute(t1,#PB_TrackBar_Maximum)-GetGadgetState(t1)))
@@ -652,7 +612,6 @@ Procedure Window_Verkaufen(spieler)
         SetGadgetText(taler,Str(PeekL(mem+25)))
         SetGadgetText(lager,Str(PeekL(mem+56)))
         
-        ;endcase
     EndSelect
     
   ForEver
@@ -662,7 +621,6 @@ Procedure Window_Steuern(spieler)
   window=WinOpen(330,210,"Steuern und Justiz")
   
   mem=spieler(spieler)
-  ;CreateGadgetList(WindowID(window))
   TextGadget(-1,140,10,60,20,"lasch")
   TextGadget(-1,200,10,60,20,"gierig",#PB_Text_Right)
   TextGadget(-1,140,140,60,20,"gnädig")
@@ -684,6 +642,11 @@ Procedure Window_Steuern(spieler)
   SetGadgetState(t2,PeekB(mem+77))
   SetGadgetState(t3,PeekB(mem+78))
   button=ButtonGadget(-1,115,170,100,30,"Fertig")
+  
+  ImageGadget(-1,20, 30,32,32,ImageID(icon(24)))
+  ImageGadget(-1,20, 70,32,32,ImageID(icon(25)))
+  ImageGadget(-1,20,110,32,32,ImageID(icon(26)))
+  
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -691,32 +654,21 @@ Procedure Window_Steuern(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(24),WindowOutput(window),20, 30,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(25),WindowOutput(window),20, 70,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(26),WindowOutput(window),20,110,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case t1
             PokeB(mem+76,GetGadgetState(t1))
             SetGadgetText(a1,Str(GetGadgetState(t1))+" %")
-            ;endcase
           Case t2
             PokeB(mem+77,GetGadgetState(t2))
             SetGadgetText(a2,Str(GetGadgetState(t2))+" %")
-            ;endcase
           Case t3
             PokeB(mem+78,GetGadgetState(t3))
             SetGadgetText(a3,Str(GetGadgetState(t3))+" %")
-            ;endcase
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver

@@ -7,7 +7,6 @@
 Procedure Window_NeuesSpiel()
   window=WinOpen(200,260,"Neues Spiel")
   
-  ;;CreateGadgetList(WindowID(window))
   TextGadget(-1,20,20,160,60,"Bitte die Anzahl der Menschlichen Spieler einstellen:")
   track1=TrackBarGadget(-1,20,80,140,20,1,10,#PB_TrackBar_Ticks)
   text1=TextGadget(-1,160,80,60,20,"1")
@@ -59,7 +58,7 @@ Procedure Window_NeuesSpiel()
               ;spieler(x)=ReAllocateMemory(spieler(x),#spieler_size)
               CopyMemory(leer,spieler(x),#spieler_size)
               mem=spieler(x)
-              PokeS(spieler(x)+1,namen(x),16)
+              PokeS(spieler(x)+1,namen(x),16,#PB_Ascii)
               PokeL(spieler(x)+17,1000);einwohner
               PokeL(spieler(x)+21,10000);land
               PokeL(spieler(x)+25,1000) ;taler
@@ -101,9 +100,8 @@ Procedure Window_SetSpielerName(x)
     ;{
     window=WinOpen(200,240,"Spielerdaten")
     
-    ;CreateGadgetList(WindowID(window))
     TextGadget(-1,20,10,160,20,"Spieler "+Str(x+1))
-    string=StringGadget(-1,20,30,160,20,PeekS(spieler(x)+1,16))
+    string=StringGadget(-1,20,30,160,20,PeekS(spieler(x)+1,16,#PB_Ascii))
     TextGadget(-1,20,60,160,20,"Land:")
     combo=ComboBoxGadget(-1,20,80,160,22)
     For y=0 To 9
@@ -127,7 +125,7 @@ Procedure Window_SetSpielerName(x)
         Case #PB_Event_Gadget
           Select EventGadget
             Case button
-              PokeS(spieler(x)+1,GetGadgetText(string),16)
+              PokeS(spieler(x)+1,GetGadgetText(string),16,#PB_Ascii)
               For y=0 To 9
                 If GetGadgetText(combo)=land(y)\name
                   land(y)\vergeben=1
@@ -161,14 +159,16 @@ Procedure Window_Begruesung(spieler)
   PlaySound(sounds(9))
   window=WinOpen(270,250,"Sic transit gloria mundi...")
   
-  ;;CreateGadgetList(WindowID(window))
-  TextGadget(-1,20,20,230,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
+  TextGadget(-1,20,20,230,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
   TextGadget(-1,10,50,240,20,"Willkommen im Jahre des Herrn "+Str(PeekW(spiel+1))+",",#PB_Text_Center)
   TextGadget(-1,20,80,230,20,"Oh Herrlicher!",#PB_Text_Center)
   TextGadget(-1,20,150,230,20,"Erwartet nun die Berichte Eurer",#PB_Text_Center)
   TextGadget(-1,20,180,230,20,"Berater, teuerster Herrscher!",#PB_Text_Center)
+  ImageGadget(-1,125-6,100,32,32,ImageID(icon(10)))
+  ImageGadget(-1,20,200,32,32,ImageID(icon(11)))
+  ImageGadget(-1,270-52,200,32,32,ImageID(icon(11)))
   button=ButtonGadget(-1,85,210,100,20,"Nun gut")
-  SetWindowTitle(MainWindow,"Kaiser - "+titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
+  SetWindowTitle(MainWindow,"Kaiser - "+titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -176,20 +176,12 @@ Procedure Window_Begruesung(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(10),WindowOutput(window),125-6,100,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window),20,200,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(11),WindowOutput(window),270-52,200,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -197,11 +189,9 @@ Procedure Window_Begruesung(spieler)
 EndProcedure
 Procedure Window_Hochzeitsgeschenk(spieler)
   window=WinOpen(310,130,"Hochzeitsgeschenke")
-  
+  ImageGadget(-1,20,20,32,32,ImageID(icon(1)))
+  ImageGadget(-1,20,55,32,32,ImageID(icon(2)))
   mem=spieler(spieler)
-  ;;CreateGadgetList(WindowID(window))
-  DrawTransparentImage(icon(1),WindowOutput(window),20,20,32,32,0,0,32,32,$FF00FF)
-  DrawTransparentImage(icon(2),WindowOutput(window),20,55,32,32,0,0,32,32,$FF00FF)
   ; CHEATING !!!!!
   ; PokeL(mem+21,PeekL(mem+21)+150000)
   ; PokeL(mem+25,PeekL(mem+25)+1500000)
@@ -251,6 +241,8 @@ Procedure Window_Hochzeitsgeschenk(spieler)
   TextGadget(-1,60,20,200,30,text1)
   TextGadget(-1,60,60,200,30,text2)
   button=ButtonGadget(-1,75,100,130,20,text3)
+  ImageGadget(-1,20,20,32,32,ImageID(icon(icon1)))
+  ImageGadget(-1,20,55,32,32,ImageID(icon(icon2)))
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -258,19 +250,12 @@ Procedure Window_Hochzeitsgeschenk(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(icon1),WindowOutput(window),20,20,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(icon2),WindowOutput(window),20,55,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -278,12 +263,12 @@ Procedure Window_Hochzeitsgeschenk(spieler)
 EndProcedure
 Procedure Window_Held(spieler)
   window=WinOpen(270,200,"Was für ein Held!")
-  ;CreateGadgetList(WindowID(window))
   
-  DrawTransparentImage(icon(3),WindowOutput(window),20,20,32,32,0,0,32,32,$FF00FF)
+  ImageGadget(-1,20,20,32,32,ImageID(icon(3)))
   TextGadget(-1,60,20,190,30,"Ein jungerHeld aus einem fernen Lande bietet Euch seine Dienste an:")
   TextGadget(-1,20,60,230,70,Chr(34)+"Ewige Treue will ich Euch schwören, mein einziger Lohn soll das Blut Eurer Feinde sein! Bitte verleiht mir einen heldenhaften Namen:"+Chr(34))
   string=StringGadget(-1,50,140,150,20,"")
+  ImageGadget(-1,20,20,32,32,ImageID(icon(3)))
   button=ButtonGadget(-1,75,170,100,20,"Fertig")
   mem=spieler(spieler)
   PokeL(mem+216,7);angriff
@@ -303,26 +288,19 @@ Procedure Window_Held(spieler)
   PokeL(mem+269,7);tp
   Select PeekL(mem+256)
     Case 1;lehrmeister
-          ;endcase
     Case 2;heilkräfte
       PokeL(mem+216,6)
       PokeL(mem+220,6)
       PokeL(mem+224,5)
-      ;endcase
     Case 3;finesse
       PokeL(mem+216,6)
-      ;endcase
     Case 4;drachentöter
       PokeL(mem+216,9)
-      ;endcase
     Case 5;drachenschild
       PokeL(mem+220,8);abwehr
-                      ;endcase
-    Case 6            ;regeneration
+    Case 6;regeneration
       PokeL(mem+220,6)
       PokeL(mem+224,5)
-      
-      ;endcase
   EndSelect
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -331,19 +309,13 @@ Procedure Window_Held(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(3),WindowOutput(window),20,20,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
-            PokeS(mem+200,GetGadgetText(string),16)
+            PokeS(mem+200,GetGadgetText(string),16,#PB_Ascii)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -352,9 +324,10 @@ EndProcedure
 Procedure Window_Hexe(spieler)
   window=WinOpen(340,220,"Eine Hexe")
   
-  ;;CreateGadgetList(WindowID(window))
   TextGadget(-1,60,20,260,50,"Eine junge Frau tritt an Euch heran. Sie wirkt recht schlampig mit ihrem roten Haar und dem brennenden Stengel in ihrem Mund.")
   TextGadget(-1,20,70,300,70,Chr(34)+"Helden sterben und dann kommen neue. Mein Geschenk an Euch soll ewig währen! Ich möchte Euch mit einem nützlichen Zauber belegen. Wählt einen:"+Chr(34))
+  ImageGadget(-1,20,25,32,32,ImageID(icon(12)))
+  ImageGadget(-1,260,130,32,32,ImageID(icon(12)))
   combo=ComboBoxGadget(-1,20,145,160,22)
   button=ButtonGadget(-1,220,180,100,20,"Fertig")
   For x=0 To 11
@@ -368,20 +341,13 @@ Procedure Window_Hexe(spieler)
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        DrawTransparentImage(icon(12),WindowOutput(window),20,25,32,32,0,0,32,32,$FF00FF)
-        DrawTransparentImage(icon(12),WindowOutput(window),260,130,32,32,0,0,32,32,$FF00FF)
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             PokeB(spieler(spieler)+122,GetGadgetState(combo))
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver

@@ -22,8 +22,3 @@ XIncludeFile "includes\Jahresende.pbi"
 XIncludeFile "includes\DataSection.pbi"
 
 ;##### ------------------------------------------------------------------------
-; IDE Options = PureBasic 4.31 (Windows - x86)
-; CursorPosition = 16
-; EnableXP
-; CurrentDirectory = D:\Projekt\MyEd\
-; CompileSourceDirectory
