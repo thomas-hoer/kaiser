@@ -60,19 +60,19 @@ Procedure Window_Befoerderung(spieler)
   
   mem=spieler(spieler)
   
-  TextGadget(-1,50, 10,240,40,"Wisset, daß im Jahre des Herrn "+Str(PeekW(spiel+1))+" das Volk seinem generösem Führer",#PB_Text_Center)
-  TextGadget(-1,50, 50,240,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
-  TextGadget(-1,50, 75,240,40,"einen neuen Titel verlieh. Er durfte fürderhin mit vollerm Rechte den Titel",#PB_Text_Center)
-  TextGadget(-1,100,120,140,20,UCase(titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33))),#PB_Text_Center)
-  TextGadget(-1,50,150,240,40,"tragen und gelobte hoch und heilig, sich dieser Bürde stets würdig zu erweisen.",#PB_Text_Center)
+  TextGadget(#PB_Any,50, 10,240,40,"Wisset, daß im Jahre des Herrn "+Str(PeekW(spiel+1))+" das Volk seinem generösem Führer",#PB_Text_Center)
+  TextGadget(#PB_Any,50, 50,240,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
+  TextGadget(#PB_Any,50, 75,240,40,"einen neuen Titel verlieh. Er durfte fürderhin mit vollerm Rechte den Titel",#PB_Text_Center)
+  TextGadget(#PB_Any,100,120,140,20,UCase(titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33))),#PB_Text_Center)
+  TextGadget(#PB_Any,50,150,240,40,"tragen und gelobte hoch und heilig, sich dieser Bürde stets würdig zu erweisen.",#PB_Text_Center)
   
-  ImageGadget(-1, 10, 10,32,32,ImageID(icon(11)))
-  ImageGadget(-1, 10,198,32,32,ImageID(icon(11)))
-  ImageGadget(-1,298, 10,32,32,ImageID(icon(11)))
-  ImageGadget(-1,298,198,32,32,ImageID(icon(11)))
-  ImageGadget(-1, 60,110,32,32,ImageID(icon(10)))
-  ImageGadget(-1,248,110,32,32,ImageID(icon(10)))
-  button=ButtonGadget(-1,100,200,140,30,"Kier konsolodieren")
+  ImageGadget(#PB_Any, 10, 10,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any, 10,198,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any,298, 10,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any,298,198,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any, 60,110,32,32,ImageID(icon(10)))
+  ImageGadget(#PB_Any,248,110,32,32,ImageID(icon(10)))
+  button=ButtonGadget(#PB_Any,100,200,140,30,"Kier konsolodieren")
   
   PokeL(mem+34,PeekL(mem+34)+10)
   
@@ -113,17 +113,17 @@ Procedure Window_Befoerderung_Kaiser(spieler)
   
   mem=spieler(spieler)
   
-  TextGadget(-1,50, 20,240,20,"VIVAT!",#PB_Text_Center)
-  TextGadget(-1,20, 50,300,40,"Wisset, daß im Jahre des Herrn "+Str(PeekW(spiel+1))+" die Nation einen neuen Despoten gekrönt hat:",#PB_Text_Center)
-  TextGadget(-1,20, 90,300,20,titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
-  TextGadget(-1,20,240,300,60,"Während Euer Name in die ewigen Annalen eingehen wird, werden Eure Nebenbuhler bald der Vergessenheit anheim gefallen sein!",#PB_Text_Center)
+  TextGadget(#PB_Any,50, 20,240,20,"VIVAT!",#PB_Text_Center)
+  TextGadget(#PB_Any,20, 50,300,40,"Wisset, daß im Jahre des Herrn "+Str(PeekW(spiel+1))+" die Nation einen neuen Despoten gekrönt hat:",#PB_Text_Center)
+  TextGadget(#PB_Any,20, 90,300,20,titel(PeekW(spieler(spieler)+84)+1,PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
+  TextGadget(#PB_Any,20,240,300,60,"Während Euer Name in die ewigen Annalen eingehen wird, werden Eure Nebenbuhler bald der Vergessenheit anheim gefallen sein!",#PB_Text_Center)
   
-  button=ButtonGadget(-1,100,300,140,30,"Fin")
-  ImageGadget(-1, 10, 10,32,32,ImageID(icon(10)))
-  ImageGadget(-1, 10,298,32,32,ImageID(icon(11)))
-  ImageGadget(-1,298, 10,32,32,ImageID(icon(10)))
-  ImageGadget(-1,298,298,32,32,ImageID(icon(11)))
-  ImageGadget(-1,110,115,120,116,ImageID(krone))
+  button=ButtonGadget(#PB_Any,100,300,140,30,"Fin")
+  ImageGadget(#PB_Any, 10, 10,32,32,ImageID(icon(10)))
+  ImageGadget(#PB_Any, 10,298,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any,298, 10,32,32,ImageID(icon(10)))
+  ImageGadget(#PB_Any,298,298,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any,110,115,120,116,ImageID(krone))
   PokeL(mem+34,PeekL(mem+34)+10)
   
   If PeekL(mem+34)>100
@@ -155,29 +155,29 @@ Procedure Window_Befoerderung_Kaiser(spieler)
             punkte+(PeekL(mem+25)-1000000)/400;obligatorische taler
             
             If PeekL(annale+9096)>PeekW(spiel+1)-1400
-              PokeS(annale+9000,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
+              PokeS(annale+9000,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9096,PeekW(spiel+1)-1400)
             EndIf
             
             If PeekL(annale+9196)<PeekL(mem+21)
-              PokeS(annale+9100,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
+              PokeS(annale+9100,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9196,PeekL(mem+21))
             EndIf
             
             If PeekL(annale+9296)<PeekL(mem+17)
-              PokeS(annale+9200,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
+              PokeS(annale+9200,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9296,PeekL(mem+17))
             EndIf
             
             If PeekL(annale+9396)<PeekL(mem+25)
-              PokeS(annale+9300,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
+              PokeS(annale+9300,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
               PokeL(annale+9396,PeekL(mem+25))
             EndIf
             
             For x=0 To 9
               If punkte>PeekL(annale+96+(x*100))
                 CopyMemory(annale+(x*100),annale+(x*100)+100,(9-x)*100)
-                PokeS(annale+(x*100),titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
+                PokeS(annale+(x*100),titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Ascii)
                 PokeL(annale+88+(x*100),PeekB(mem+122))
                 PokeL(annale+92+(x*100),PeekW(spiel+1))
                 PokeL(annale+96+(x*100),punkte)

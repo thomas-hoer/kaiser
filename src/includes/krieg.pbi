@@ -48,37 +48,37 @@ Procedure AddEinheit(spieler,name.s,angriff,abwehr,tp,schritte,reichweite,salven
   Else ;{
     window=WinOpen(400,220,"Einer muss gehen")
     
-    TextGadget(-1,10,10,380,40,"Die Kaserne platzt aus allen Nähten, wir müssen einen Krieger entlassen!")
-    o1=OptionGadget(-1, 10, 60,20,20,"")
-    o2=OptionGadget(-1, 10,100,20,20,"")
-    o3=OptionGadget(-1, 10,140,20,20,"")
-    o4=OptionGadget(-1,140, 60,20,20,"")
-    o5=OptionGadget(-1,140,100,20,20,"")
-    o6=OptionGadget(-1,140,140,20,20,"")
-    o7=OptionGadget(-1,270, 60,20,20,"")
-    o8=OptionGadget(-1,270,100,20,20,"")
-    o9=OptionGadget(-1,270,140,20,20,"")
-    TextGadget(-1, 70, 50,70,40,EinheitName(0)+#CRLF$+"Sold: "+Str(EinheitSold(0)))
-    TextGadget(-1, 70, 90,70,40,EinheitName(1)+#CRLF$+"Sold: "+Str(EinheitSold(1)))
-    TextGadget(-1, 70,130,70,40,EinheitName(2)+#CRLF$+"Sold: "+Str(EinheitSold(2)))
-    TextGadget(-1,200, 50,70,40,EinheitName(3)+#CRLF$+"Sold: "+Str(EinheitSold(3)))
-    TextGadget(-1,200, 90,70,40,EinheitName(4)+#CRLF$+"Sold: "+Str(EinheitSold(4)))
-    TextGadget(-1,200,130,70,40,EinheitName(5)+#CRLF$+"Sold: "+Str(EinheitSold(5)))
-    TextGadget(-1,330, 50,70,40,EinheitName(6)+#CRLF$+"Sold: "+Str(EinheitSold(6)))
-    TextGadget(-1,330, 90,70,40,EinheitName(7)+#CRLF$+"Sold: "+Str(EinheitSold(7)))
-    TextGadget(-1,330,130,70,40,name+#CRLF$+"Sold: "+Str(sold))
+    TextGadget(#PB_Any,10,10,380,40,"Die Kaserne platzt aus allen Nähten, wir müssen einen Krieger entlassen!")
+    o1=OptionGadget(#PB_Any, 10, 60,20,20,"")
+    o2=OptionGadget(#PB_Any, 10,100,20,20,"")
+    o3=OptionGadget(#PB_Any, 10,140,20,20,"")
+    o4=OptionGadget(#PB_Any,140, 60,20,20,"")
+    o5=OptionGadget(#PB_Any,140,100,20,20,"")
+    o6=OptionGadget(#PB_Any,140,140,20,20,"")
+    o7=OptionGadget(#PB_Any,270, 60,20,20,"")
+    o8=OptionGadget(#PB_Any,270,100,20,20,"")
+    o9=OptionGadget(#PB_Any,270,140,20,20,"")
+    TextGadget(#PB_Any, 70, 50,70,40,EinheitName(0)+#CRLF$+"Sold: "+Str(EinheitSold(0)))
+    TextGadget(#PB_Any, 70, 90,70,40,EinheitName(1)+#CRLF$+"Sold: "+Str(EinheitSold(1)))
+    TextGadget(#PB_Any, 70,130,70,40,EinheitName(2)+#CRLF$+"Sold: "+Str(EinheitSold(2)))
+    TextGadget(#PB_Any,200, 50,70,40,EinheitName(3)+#CRLF$+"Sold: "+Str(EinheitSold(3)))
+    TextGadget(#PB_Any,200, 90,70,40,EinheitName(4)+#CRLF$+"Sold: "+Str(EinheitSold(4)))
+    TextGadget(#PB_Any,200,130,70,40,EinheitName(5)+#CRLF$+"Sold: "+Str(EinheitSold(5)))
+    TextGadget(#PB_Any,330, 50,70,40,EinheitName(6)+#CRLF$+"Sold: "+Str(EinheitSold(6)))
+    TextGadget(#PB_Any,330, 90,70,40,EinheitName(7)+#CRLF$+"Sold: "+Str(EinheitSold(7)))
+    TextGadget(#PB_Any,330,130,70,40,name+#CRLF$+"Sold: "+Str(sold))
     For x=0 To 2
-      ImageGadget(-1,30,50+x*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
+      ImageGadget(#PB_Any,30,50+x*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
     Next
     For x=3 To 5
-      ImageGadget(-1,160,50+(x-3)*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
+      ImageGadget(#PB_Any,160,50+(x-3)*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
     Next
     For x=6 To 7
-      ImageGadget(-1,290,50+(x-6)*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
+      ImageGadget(#PB_Any,290,50+(x-6)*40,32,32,ImageID(icon(ehicon(EinheitBild(x),0))))
     Next
-    ImageGadget(-1,290,50+(2)*40,32,32,ImageID(icon(ehicon(bild,0))))
+    ImageGadget(#PB_Any,290,50+(2)*40,32,32,ImageID(icon(ehicon(bild,0))))
 
-    button=ButtonGadget(-1,150,180,100,20,"Adieu")
+    button=ButtonGadget(#PB_Any,150,180,100,20,"Adieu")
     SetGadgetState(o1,1)
     Repeat
       Event=WaitWindowEvent(#TimeOut)
@@ -100,7 +100,6 @@ Procedure AddEinheit(spieler,name.s,angriff,abwehr,tp,schritte,reichweite,salven
           Line(265, 47,0,120,0)
           Line(395, 47,0,120,0)
           StopDrawing()
-          ;endcase
         Case #PB_Event_Gadget
           Select EventGadget
             Case button
@@ -134,9 +133,7 @@ Procedure AddEinheit(spieler,name.s,angriff,abwehr,tp,schritte,reichweite,salven
                 CloseWindow(window)
               EndIf
               ProcedureReturn 1
-              ;endcase
           EndSelect
-          ;endcase
       EndSelect
       
     ForEver
@@ -152,10 +149,10 @@ Procedure Window_Rekrutieren_Msg_ZuWenigGeld(text.s)
   
   mem=spieler(spieler)
   
-  TextGadget(-1,50,20,140,70,"Ihr habt nicht genug "+#CRLF$+"Taler um Euch"+#CRLF$+text+#CRLF$+"zu kaufen!")
+  TextGadget(#PB_Any,50,20,140,70,"Ihr habt nicht genug "+#CRLF$+"Taler um Euch"+#CRLF$+text+#CRLF$+"zu kaufen!")
   ImageGadget(#PB_Any,10,20,32,32,ImageID(icon(24)))
   
-  button=ButtonGadget(-1,50,100,100,20,"Ohh!")
+  button=ButtonGadget(#PB_Any,50,100,100,20,"Ohh!")
   
   Repeat
     
@@ -204,21 +201,21 @@ Procedure Window_Rekrutieren(spieler)
     spezial   =0
     bild      =102
     
-    t1=TextGadget(-1,50,10,120,40,name.s+#CRLF$+spezial(spezial),#PB_Text_Center)
-    TextGadget(-1,10,050,60,15,"Angriff:")
-    TextGadget(-1,10,065,60,15,"Abwehr:")
-    TextGadget(-1,10,080,60,15,"Treffer:")
-    TextGadget(-1,110,050,65,15,"Reichweite:")
-    TextGadget(-1,110,065,60,15,"Schritte:")
-    TextGadget(-1,110,080,30,15,"Sold:")
-    t2=TextGadget(-1,70,50,30,15,Str(angriff),#PB_Text_Right)
-    t3=TextGadget(-1,70,65,30,15,Str(abwehr),#PB_Text_Right)
-    t4=TextGadget(-1,70,80,30,15,Str(treffer),#PB_Text_Right)
-    t5=TextGadget(-1,175,50,25,15,Str(reichweite),#PB_Text_Right)
-    t6=TextGadget(-1,170,65,30,15,Str(schritte),#PB_Text_Right)
-    t7=TextGadget(-1,140,80,60,15,Str(sold),#PB_Text_Right)
-    combo=ComboBoxGadget(-1,10,105,200,22)
-    text=TextGadget(-1,10,140,200,40,"Diese Einheit "+name+Chr(10)+"kostet euch "+Str(sold*10)+" Taler")
+    t1=TextGadget(#PB_Any,50,10,120,40,name.s+#CRLF$+spezial(spezial),#PB_Text_Center)
+    TextGadget(#PB_Any,10,050,60,15,"Angriff:")
+    TextGadget(#PB_Any,10,065,60,15,"Abwehr:")
+    TextGadget(#PB_Any,10,080,60,15,"Treffer:")
+    TextGadget(#PB_Any,110,050,65,15,"Reichweite:")
+    TextGadget(#PB_Any,110,065,60,15,"Schritte:")
+    TextGadget(#PB_Any,110,080,30,15,"Sold:")
+    t2=TextGadget(#PB_Any,70,50,30,15,Str(angriff),#PB_Text_Right)
+    t3=TextGadget(#PB_Any,70,65,30,15,Str(abwehr),#PB_Text_Right)
+    t4=TextGadget(#PB_Any,70,80,30,15,Str(treffer),#PB_Text_Right)
+    t5=TextGadget(#PB_Any,175,50,25,15,Str(reichweite),#PB_Text_Right)
+    t6=TextGadget(#PB_Any,170,65,30,15,Str(schritte),#PB_Text_Right)
+    t7=TextGadget(#PB_Any,140,80,60,15,Str(sold),#PB_Text_Right)
+    combo=ComboBoxGadget(#PB_Any,10,105,200,22)
+    text=TextGadget(#PB_Any,10,140,200,40,"Diese Einheit "+name+Chr(10)+"kostet euch "+Str(sold*10)+" Taler")
     AddGadgetItem(combo,-1,"Wachen")
     AddGadgetItem(combo,-1,"Kämpfer")
     AddGadgetItem(combo,-1,"Bogenschützen")
@@ -232,8 +229,8 @@ Procedure Window_Rekrutieren(spieler)
     krieger_bild=ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(ehicon(bild,0))) )
     ImageGadget(#PB_Any, 178, 10, 32, 32, ImageID (icon(33)) )
     
-    button=ButtonGadget(-1,20,200,80,20,"Kaufen")
-    abbrechen=ButtonGadget(-1,120,200,80,20,"Abbrechen")
+    button=ButtonGadget(#PB_Any,20,200,80,20,"Kaufen")
+    abbrechen=ButtonGadget(#PB_Any,120,200,80,20,"Abbrechen")
     PokeW(mem+46,PeekW(mem+46)+2)
     Repeat
       Event=WaitWindowEvent(#TimeOut)
@@ -241,10 +238,6 @@ Procedure Window_Rekrutieren(spieler)
       EventGadget=EventGadget()
       EventType=EventType()
       Select Event
-        Case #PB_Event_Repaint
-          RePaint(EventWindow())
-          
-          ;endcase
         Case #PB_Event_Gadget
           Select EventGadget
             Case combo
@@ -260,7 +253,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =50
                   spezial   =0
                   bild      =102
-                  ;endcase
                 Case "Kämpfer"
                   name.s    ="Kämpfer"
                   angriff   =3
@@ -272,7 +264,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =100
                   spezial   =0
                   bild      =103
-                  ;endcase
                 Case "Bogenschützen"
                   name.s    ="Bogenschützen"
                   angriff   =3
@@ -284,7 +275,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =300
                   spezial   =0
                   bild      =104
-                  ;endcase
                 Case "Infanterie"
                   name.s    ="Infanterie"
                   angriff   =4
@@ -296,7 +286,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =500
                   spezial   =0
                   bild      =105
-                  ;endcase
                 Case "Kavallerie"
                   name.s    ="Kavallerie"
                   angriff   =5
@@ -308,7 +297,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =1000
                   spezial   =0
                   bild      =106
-                  ;endcase
                 Case "Artillerie"
                   name.s    ="Artillerie"
                   angriff   =6
@@ -320,7 +308,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =2500
                   spezial   =0
                   bild      =107
-                  ;endcase
                 Case "Ritter"
                   name.s    ="Ritter"
                   angriff   =6
@@ -332,7 +319,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =4000
                   spezial   =0
                   bild      =108
-                  ;endcase
                 Case "Kreuzritter"
                   name.s    ="Kreuzritter"
                   angriff   =7
@@ -344,7 +330,6 @@ Procedure Window_Rekrutieren(spieler)
                   sold      =7500
                   spezial   =Random(3)+3
                   bild      =109
-                  ;endcase
               EndSelect
               InvalidateRect_(WindowID(window), 0, 1) 
               SetGadgetText(t1,name+#CRLF$+spezial(spezial))
@@ -356,7 +341,6 @@ Procedure Window_Rekrutieren(spieler)
               SetGadgetText(t7,Str(sold))
               SetGadgetText(text,"Diese Einheit "+name+Chr(10)+"kostet euch "+Str(sold*2)+" Taler")
               SetGadgetState(krieger_bild,ImageID(icon(ehicon(bild,0))))
-              ;endcase
             Case button
               If PeekL(mem+25)-sold*2>0 ;mehr geld - sold * 10
                 PokeL(mem+25,PeekL(mem+25)-sold*2)
@@ -366,13 +350,10 @@ Procedure Window_Rekrutieren(spieler)
               Else
                 Window_Rekrutieren_Msg_ZuWenigGeld("einen "+name)
               EndIf
-              ;endcase
             Case abbrechen
               CloseWindow(window)
               ProcedureReturn 0
-              ;endcase
           EndSelect
-          ;endcase
       EndSelect
       
     ForEver
@@ -383,9 +364,9 @@ Procedure Window_Rekrutieren(spieler)
     
     mem=spieler(spieler)
     
-    TextGadget(-1,50,20,180,70,"Ihr habt zu viele Einheiten."+#CRLF$+"Ihr müsst erst welche entlassen"+#CRLF$+"um neue Rekrutieren zu können")
+    TextGadget(#PB_Any,50,20,180,70,"Ihr habt zu viele Einheiten."+#CRLF$+"Ihr müsst erst welche entlassen"+#CRLF$+"um neue Rekrutieren zu können")
     ImageGadget(#PB_Any, 10, 20, 32, 32, ImageID (icon(3)) )
-    button=ButtonGadget(-1,70,100,100,20,"Schade")
+    button=ButtonGadget(#PB_Any,70,100,100,20,"Schade")
     
     Repeat
       
@@ -422,22 +403,22 @@ Procedure Window_Inspizieren(spieler)
   For x=0 To 7
     ;{
     If x<4
-      ContainerGadget(-1,10,10+x*120,200,110,#PB_Container_Single      )
+      ContainerGadget(#PB_Any,10,10+x*120,200,110,#PB_Container_Single      )
     Else
-      ContainerGadget(-1,230,10+(x-4)*120,200,110,#PB_Container_Single )
+      ContainerGadget(#PB_Any,230,10+(x-4)*120,200,110,#PB_Container_Single )
     EndIf
     If PeekL(mem+224+(x*100))
-      TextGadget(-1,50,0,80,18,PeekS(mem+200+(x*100),16))
-      TextGadget(-1,130,0,60,20,eh_titel(PeekL(mem+252+(x*100))),#PB_Text_Right)
-      TextGadget(-1,50,18,140,18,"Spezial: "+spezial(PeekL(mem+256+(x*100))))
-      TextGadget(-1,5,36,60,54,"Angriff:"+#CRLF$+"Abwehr:"+#CRLF$+"Treffer:")
-      TextGadget(-1,65,36,30,54,Str(PeekL(mem+216+(x*100)))+#CRLF$+Str(PeekL(mem+220+(x*100)))+#CRLF$+Str(PeekL(mem+224+(x*100)))+"/"+Str(PeekL(mem+269+(x*100))),#PB_Text_Center)
-      TextGadget(-1,95,36,60,54,"Salven:"+#CRLF$+"Schritte:"+#CRLF$+"Sold:")
-      TextGadget(-1,155,36,40,54,Str(PeekL(mem+236+(x*100)))+#CRLF$+Str(PeekL(mem+228+(x*100)))+#CRLF$+Str(PeekL(mem+240+(x*100))),#PB_Text_Right)
-      behalten(x)=CheckBoxGadget(-1,5,90,190,20,"Behalten")
+      TextGadget(#PB_Any,50,0,80,18,PeekS(mem+200+(x*100),16))
+      TextGadget(#PB_Any,130,0,60,20,eh_titel(PeekL(mem+252+(x*100))),#PB_Text_Right)
+      TextGadget(#PB_Any,50,18,140,18,"Spezial: "+spezial(PeekL(mem+256+(x*100))))
+      TextGadget(#PB_Any,5,36,60,54,"Angriff:"+#CRLF$+"Abwehr:"+#CRLF$+"Treffer:")
+      TextGadget(#PB_Any,65,36,30,54,Str(PeekL(mem+216+(x*100)))+#CRLF$+Str(PeekL(mem+220+(x*100)))+#CRLF$+Str(PeekL(mem+224+(x*100)))+"/"+Str(PeekL(mem+269+(x*100))),#PB_Text_Center)
+      TextGadget(#PB_Any,95,36,60,54,"Salven:"+#CRLF$+"Schritte:"+#CRLF$+"Sold:")
+      TextGadget(#PB_Any,155,36,40,54,Str(PeekL(mem+236+(x*100)))+#CRLF$+Str(PeekL(mem+228+(x*100)))+#CRLF$+Str(PeekL(mem+240+(x*100))),#PB_Text_Right)
+      behalten(x)=CheckBoxGadget(#PB_Any,5,90,190,20,"Behalten")
       SetGadgetState(behalten(x),1)
     Else
-      behalten(x)=CheckBoxGadget(-1,0,0,0,0,"")
+      behalten(x)=CheckBoxGadget(#PB_Any,0,0,0,0,"")
       HideGadget(behalten(x),1)
     EndIf
     CloseGadgetList()
@@ -445,16 +426,16 @@ Procedure Window_Inspizieren(spieler)
   Next
   For x=0 To 3
     If PeekL(mem+224+(x*100))
-      ImageGadget(-1,15,15+x*120,32,32,ImageID(icon(ehicon(PeekL(mem+264+(x*100)),0))))
+      ImageGadget(#PB_Any,15,15+x*120,32,32,ImageID(icon(ehicon(PeekL(mem+264+(x*100)),0))))
     EndIf
   Next
   For x=4 To 7
     If PeekL(mem+224+(x*100))
-      ImageGadget(-1,235,15+(x-4)*120,32,32,ImageID(icon(ehicon(PeekL(mem+264+(x*100)),0))))
+      ImageGadget(#PB_Any,235,15+(x-4)*120,32,32,ImageID(icon(ehicon(PeekL(mem+264+(x*100)),0))))
     EndIf
   Next
-  button=ButtonGadget(-1,110,490,100,20,"Fertig")
-  abbrechen=ButtonGadget(-1,230,490,100,20,"Abbrechen")
+  button=ButtonGadget(#PB_Any,110,490,100,20,"Fertig")
+  abbrechen=ButtonGadget(#PB_Any,230,490,100,20,"Abbrechen")
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -482,13 +463,10 @@ Procedure Window_Inspizieren(spieler)
             Next
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -500,7 +478,7 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
   window=WinOpen(320,310,"Kriegerverteilung")
   
   mem=spieler(spieler1)
-  button=ButtonGadget(-1,100,270,120,30,"So soll es sein!")
+  button=ButtonGadget(#PB_Any,100,270,120,30,"So soll es sein!")
   Repeat
     newtime=GetTickCount_()
     time+(newtime-oldtime)
@@ -654,15 +632,12 @@ Procedure Window_Krieg_KampfVerteilung(spieler1,spieler2)
             EndIf
           Next
         EndIf ;}
-              ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case button
             CloseWindow(window)
             ProcedureReturn res
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -678,16 +653,16 @@ Procedure.s Window_Krieg(spieler)
   window=WinOpen(300,240,"Wählt Euer Opfer!")
   
   mem=spieler(spieler)
-  TextGadget(-1,50,10,200,40,"Über wen sollen Eure Truppen diesmal herfallen?",#PB_Text_Center)
-  combo=ComboBoxGadget(-1,10,70,280,22)
+  TextGadget(#PB_Any,50,10,200,40,"Über wen sollen Eure Truppen diesmal herfallen?",#PB_Text_Center)
+  combo=ComboBoxGadget(#PB_Any,10,70,280,22)
   For x=0 To PeekB(spiel)
     If x<>spieler
       AddGadgetItem(combo,-1,titel(PeekW(spieler(x)+84),PeekB(spieler(x)+33))+" "+PeekS(spieler(x)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(x)+124))\name)
     EndIf
   Next
   SetGadgetState(combo,0)
-  button=ButtonGadget(-1,25,200,100,30,"Krieg")
-  abbrechen=ButtonGadget(-1,175,200,100,30,"Abbrechen")
+  button=ButtonGadget(#PB_Any,25,200,100,30,"Krieg")
+  abbrechen=ButtonGadget(#PB_Any,175,200,100,30,"Abbrechen")
   
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(33)) )
   ImageGadget(#PB_Any, 258, 10, 32, 32, ImageID (icon(33)) )
@@ -708,13 +683,10 @@ Procedure.s Window_Krieg(spieler)
             ziel.s=GetGadgetText(combo)
             CloseWindow(window)
             ProcedureReturn ziel
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn ""
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -724,9 +696,9 @@ Procedure Window_Krieg_Gewonnen(spieler)
   window=WinOpen(260,140,"Gewonnen!")
   
   mem=spieler(spieler)
-  TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
-  TextGadget(-1,10, 50,240,60,"Ihr konntet Euch gegenüber den Angreifern behaupten und seid Siegreich aus der Schlacht emporgegangen")
-  button=ButtonGadget(-1,80,110,100,20,"Fertig")
+  TextGadget(#PB_Any,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
+  TextGadget(#PB_Any,10, 50,240,60,"Ihr konntet Euch gegenüber den Angreifern behaupten und seid Siegreich aus der Schlacht emporgegangen")
+  button=ButtonGadget(#PB_Any,80,110,100,20,"Fertig")
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -744,9 +716,7 @@ Procedure Window_Krieg_Gewonnen(spieler)
             PokeL(mem+34,PeekL(mem+34)+10)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -755,9 +725,9 @@ Procedure Window_Krieg_Verloren(spieler)
   window=WinOpen(260,140,"Verloren!")
   
   mem=spieler(spieler)
-  TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
-  TextGadget(-1,10, 50,240,60,"Ihr seit als Verlierer aus der Schlacht hervorgegangen. Auch eure Enkel werden sich mit Schande an diesen Tag erinnern.")
-  button=ButtonGadget(-1,80,110,100,20,"Grrr!")
+  TextGadget(#PB_Any,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
+  TextGadget(#PB_Any,10, 50,240,60,"Ihr seit als Verlierer aus der Schlacht hervorgegangen. Auch eure Enkel werden sich mit Schande an diesen Tag erinnern.")
+  button=ButtonGadget(#PB_Any,80,110,100,20,"Grrr!")
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -775,9 +745,7 @@ Procedure Window_Krieg_Verloren(spieler)
             PokeL(mem+34,PeekL(mem+34)-10)
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -787,24 +755,24 @@ Procedure Window_Krieg_Kriegsforderung(spieler)
   
   mem=spieler(spieler)
   Define v.Kriegsforderung
-  TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
-  TextGadget(-1,10, 50,240,60,"Ihr habt Euern Feind niedergestreckt. Nun könnt Ihr eine Kriegsforderung an den Verlierer stellen.")
-  FrameGadget(-1,10,110,240,60,"Märkte:")
-  FrameGadget(-1,10,170,240,60,"Mühlen:")
-  FrameGadget(-1,10,230,240,60,"Taler:")
-  FrameGadget(-1,10,290,240,60,"Ländereien:")
-  FrameGadget(-1,10,350,240,60,"Sklaven:")
-  tb1=TrackBarGadget(-1,50,130,150,20,0,10,#PB_TrackBar_Ticks)
-  tb2=TrackBarGadget(-1,50,190,150,20,0,10,#PB_TrackBar_Ticks)
-  tb3=TrackBarGadget(-1,50,250,150,20,0,50000)
-  tb4=TrackBarGadget(-1,50,310,150,20,0,10000)
-  tb5=TrackBarGadget(-1,50,370,150,20,0,1000)
-  tx1=TextGadget(-1,200,130,40,20,"0")
-  tx2=TextGadget(-1,200,190,40,20,"0")
-  tx3=TextGadget(-1,200,250,40,20,"0")
-  tx4=TextGadget(-1,200,310,40,20,"0")
-  tx5=TextGadget(-1,200,370,40,20,"0")
-  button=ButtonGadget(-1,80,420,100,20,"Fertig",#PB_TrackBar_Ticks)
+  TextGadget(#PB_Any,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
+  TextGadget(#PB_Any,10, 50,240,60,"Ihr habt Euern Feind niedergestreckt. Nun könnt Ihr eine Kriegsforderung an den Verlierer stellen.")
+  FrameGadget(#PB_Any,10,110,240,60,"Märkte:")
+  FrameGadget(#PB_Any,10,170,240,60,"Mühlen:")
+  FrameGadget(#PB_Any,10,230,240,60,"Taler:")
+  FrameGadget(#PB_Any,10,290,240,60,"Ländereien:")
+  FrameGadget(#PB_Any,10,350,240,60,"Sklaven:")
+  tb1=TrackBarGadget(#PB_Any,50,130,150,20,0,10,#PB_TrackBar_Ticks)
+  tb2=TrackBarGadget(#PB_Any,50,190,150,20,0,10,#PB_TrackBar_Ticks)
+  tb3=TrackBarGadget(#PB_Any,50,250,150,20,0,50000)
+  tb4=TrackBarGadget(#PB_Any,50,310,150,20,0,10000)
+  tb5=TrackBarGadget(#PB_Any,50,370,150,20,0,1000)
+  tx1=TextGadget(#PB_Any,200,130,40,20,"0")
+  tx2=TextGadget(#PB_Any,200,190,40,20,"0")
+  tx3=TextGadget(#PB_Any,200,250,40,20,"0")
+  tx4=TextGadget(#PB_Any,200,310,40,20,"0")
+  tx5=TextGadget(#PB_Any,200,370,40,20,"0")
+  button=ButtonGadget(#PB_Any,80,420,100,20,"Fertig",#PB_TrackBar_Ticks)
   
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (icon(14)) )
@@ -828,30 +796,23 @@ Procedure Window_Krieg_Kriegsforderung(spieler)
           Case tb1
             v\maerkte=GetGadgetState(tb1)
             SetGadgetText(tx1,Str(GetGadgetState(tb1)))
-            ;endcase
           Case tb2
             v\muehlen=GetGadgetState(tb2)
             SetGadgetText(tx2,Str(GetGadgetState(tb2)))
-            ;endcase
           Case tb3
             v\taler=GetGadgetState(tb3)
             SetGadgetText(tx3,Str(GetGadgetState(tb3)))
-            ;endcase
           Case tb4
             v\land=GetGadgetState(tb4)
             SetGadgetText(tx4,Str(GetGadgetState(tb4)))
-            ;endcase
           Case tb5
             v\sklaven=GetGadgetState(tb5)
             SetGadgetText(tx5,Str(GetGadgetState(tb5)))
-            ;endcase
           Case button
             PokeL(mem+34,PeekL(mem+34)+10)
             CloseWindow(window)
             ProcedureReturn @v
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -861,14 +822,14 @@ Procedure Window_Krieg_Kriegsforderung2(spieler,*forderung.Kriegsforderung,forde
   
   mem=spieler(spieler)
   mem2=spieler(forderer)
-  TextGadget(-1,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16)+" von "+land(PeekB(spieler(spieler)+124))\name)
-  TextGadget(-1,10, 50,200,80,titel(PeekW(spieler(forderer)+84),PeekB(spieler(forderer)+33))+" "+PeekS(spieler(forderer)+1,16)+" von "+land(PeekB(spieler(forderer)+124))\name+" hat folgende Forderung an Euch gestellt und erwartet, dass Ihr ihr unverzüglich nachkommt:")
-  TextGadget(-1,60,135,90,20,Str(*forderung\maerkte)+" Märkte")
-  TextGadget(-1,60,175,90,20,Str(*forderung\muehlen)+" Mühlen")
-  TextGadget(-1,60,215,90,20,Str(*forderung\taler)+" Taler")
-  TextGadget(-1,60,255,90,20,Str(*forderung\land)+" Länderreien")
-  TextGadget(-1,60,295,90,20,Str(*forderung\sklaven)+" Sklaven")
-  button=ButtonGadget(-1,80,330,100,20,"Fertig",#PB_TrackBar_Ticks)
+  TextGadget(#PB_Any,50, 10,200,40,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
+  TextGadget(#PB_Any,10, 50,200,80,titel(PeekW(spieler(forderer)+84),PeekB(spieler(forderer)+33))+" "+PeekS(spieler(forderer)+1,16)+" von "+land(PeekB(spieler(forderer)+124))\name+" hat folgende Forderung an Euch gestellt und erwartet, dass Ihr ihr unverzüglich nachkommt:")
+  TextGadget(#PB_Any,60,135,90,20,Str(*forderung\maerkte)+" Märkte")
+  TextGadget(#PB_Any,60,175,90,20,Str(*forderung\muehlen)+" Mühlen")
+  TextGadget(#PB_Any,60,215,90,20,Str(*forderung\taler)+" Taler")
+  TextGadget(#PB_Any,60,255,90,20,Str(*forderung\land)+" Länderreien")
+  TextGadget(#PB_Any,60,295,90,20,Str(*forderung\sklaven)+" Sklaven")
+  button=ButtonGadget(#PB_Any,80,330,100,20,"Fertig",#PB_TrackBar_Ticks)
   
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(23)) )
   ImageGadget(#PB_Any, 20, 125, 32, 32, ImageID (icon(14)) )
@@ -893,9 +854,7 @@ Procedure Window_Krieg_Kriegsforderung2(spieler,*forderung.Kriegsforderung,forde
             PokeL(mem+34,PeekL(mem+34)+10)
             CloseWindow(window)
             ProcedureReturn @v
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -904,9 +863,9 @@ Procedure Window_Krieg_Aufgeben()
   window=WinOpen(200,80,"Kapitulation")
   
   mem=spieler(spieler)
-  TextGadget(-1,50, 10,160,40,"Wollt ihr den Rückzug antreten?")
-  button=ButtonGadget(-1,20,50,60,20,"Ja")
-  abbrechen=ButtonGadget(-1,120,50,60,20,"Nein")
+  TextGadget(#PB_Any,50, 10,160,40,"Wollt ihr den Rückzug antreten?")
+  button=ButtonGadget(#PB_Any,20,50,60,20,"Ja")
+  abbrechen=ButtonGadget(#PB_Any,120,50,60,20,"Nein")
   
   ImageGadget(#PB_Any, 10, 10, 32, 32, ImageID (icon(33)) )
   
@@ -925,13 +884,10 @@ Procedure Window_Krieg_Aufgeben()
           Case button
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
           Case abbrechen
             CloseWindow(window)
             ProcedureReturn 0
-            ;endcase
         EndSelect
-        ;endcase
     EndSelect
     
   ForEver
@@ -1077,7 +1033,6 @@ Procedure Krieg_Init_Map(mapnr=0)
       Select krieg_map(x,y)
         Case 54,82,84
           krieg_map_passierbar(x,y)=1
-          ;endcase
         Default
           krieg_map_passierbar(x,y)=0
       EndSelect
@@ -1273,9 +1228,9 @@ Procedure Krieg_Zeichne_Wer_Ist_Dran(window,wer_ist_dran)
     EndIf
   Next
   If wer_ist_dran=-1
-    DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$FFFFFF)
+    DrawText(380,501,PeekS(spieler(spieler)+1,16,#PB_Ascii),0,$FFFFFF)
   Else
-    DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$C0C0C0)
+    DrawText(380,501,PeekS(spieler(spieler)+1,16,#PB_Ascii),0,$C0C0C0)
   EndIf
   StopDrawing()
   
@@ -1345,9 +1300,9 @@ Procedure Window_Krieg_Kampf(spieler)
   PlaySound(sounds(8))
   window=WinOpen(640,560,"Entfesselt die Hunde des Krieges!")
   
-  naechster=ButtonGadget(-1,280,481,100,39,"Nächster Spieler",#PB_Button_MultiLine)
-  ;k_fordern=ButtonGadget(-1,280,520,100,20,"Kapitulation Fordern")
-  aufgeben=ButtonGadget(-1,280,520,100,40,"Aufgeben")
+  naechster=ButtonGadget(#PB_Any,280,481,100,39,"Nächster Spieler",#PB_Button_MultiLine)
+  ;k_fordern=ButtonGadget(#PB_Any,280,520,100,20,"Kapitulation Fordern")
+  aufgeben=ButtonGadget(#PB_Any,280,520,100,40,"Aufgeben")
   SetGadgetFont(naechster,FontID(Fonts(13)))
   SetGadgetFont(aufgeben,FontID(Fonts(13)))
   
@@ -1518,7 +1473,6 @@ Procedure Window_Krieg_Kampf(spieler)
                       EndIf
                     EndIf
                   Next
-                  ;endcase
                 Case 1
                   ;{
                   If WindowMouseX/32>=einheitx-1 And WindowMouseX/32<=einheitx+1
@@ -1626,9 +1580,9 @@ Procedure Window_Krieg_Kampf(spieler)
             EndIf
           Next
           If wer_ist_dran=-1
-            DrawText(380,501,PeekS(spieler(spieler)+1,16),0,$FFFFFF)
+            DrawText(380,501,PeekS(spieler(spieler)+1,16,#PB_Ascii),0,$FFFFFF)
           Else
-            DrawText(380,501,PeekS(spieler(spieler)+1,16))
+            DrawText(380,501,PeekS(spieler(spieler)+1,16,#PB_Ascii))
           EndIf
           StopDrawing()
           ForEach einheiten()

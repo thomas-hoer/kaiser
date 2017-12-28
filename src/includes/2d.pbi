@@ -130,7 +130,7 @@ Procedure.i Paint0()
         DrawingFont(FontID(Fonts(0)))
         
         DrawText(xoff + 510,190,titel(\Titel,\Geschlecht))
-        DrawText(xoff + 510,205,\Name)
+        DrawText(xoff + 510,205,PeekS(Spielerdaten(Spieler)+OffsetOf(Struktur_Spieler\name),16,#PB_Ascii))
         DrawText(xoff + 510,220,"von "+land(\wohnort)\name)
         DrawText(xoff + 510,235,"im Jahre "+Str(*Game\Jahr))
         

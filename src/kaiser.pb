@@ -127,7 +127,6 @@ Procedure OpenMainWindow(LoadGame.s)
     Select Event
         
       Case 515;Doppelklick
-              ;{
         If ActiveGame
           If WindowMouseX(0)>246 And WindowMouseX(0)<502
             If WindowMouseY(0)>448 And WindowMouseY(0)<480
@@ -135,30 +134,22 @@ Procedure OpenMainWindow(LoadGame.s)
             EndIf
           EndIf
         EndIf
-        ;}    
       Case #PB_Event_Repaint
-        ;{
         RePaint(EventWindow())
-        ;}
       Case #PB_Event_Gadget
         ;{
         Select EventGadget
             
           Case 1;kornverteilung
             Window_Kornverteilen(PeekB(spiel+3))
-            ;endcase
           Case 2;landkauf
             Window_Landkauf(PeekB(spiel+3))
-            ;endcase
           Case 3;bauen
             Window_Bauwerke(PeekB(spiel+3))
-            ;endcase
           Case 4;verkaufen
             Window_Verkaufen(PeekB(spiel+3))
-            ;endcase
           Case 5;steuern
             Window_Steuern(PeekB(spiel+3))
-            ;endcase
           Case 6;spende
             spende.s=Window_Spende(PeekB(spiel+3))
             If spende
@@ -182,7 +173,6 @@ Procedure OpenMainWindow(LoadGame.s)
                 Window_Diplomatie_Error()
               EndIf
             EndIf
-            ;endcase
           Case 7;diplomatie
             abkommen.s=Window_Abkommen(PeekB(spiel+3))
             If abkommen
@@ -216,7 +206,6 @@ Procedure OpenMainWindow(LoadGame.s)
               EndIf
             EndIf
             
-            ;endcase
           Case 8;erpressen
             spende.s=Window_Erpressen(PeekB(spiel+3))
             If spende
@@ -244,19 +233,14 @@ Procedure OpenMainWindow(LoadGame.s)
                 Window_Diplomatie_Error()
               EndIf
             EndIf
-            ;endcase
           Case 9;sabotage
-                ;endcase
           Case 10;truppeninspizieren
             Window_Inspizieren(PeekB(spiel+3))
-            ;endcase
           Case 11;rekrutieren
             Window_Rekrutieren(PeekB(spiel+3))
-            ;endcase
           Case 12;manöver
                  ;Window_Manoever(PeekB(spiel+3))
             Window_Krieg_KampfVerteilung(PeekB(spiel+3),-1)
-            ;endcase
           Case 13;krieg
             krieg.s=Window_Krieg(PeekB(spiel+3))
             If krieg
@@ -273,25 +257,18 @@ Procedure OpenMainWindow(LoadGame.s)
               ;Window_Krieg_Nein()
               ;EndIf
             EndIf
-            ;endcase
           Case 14;demographische daten
             Window_Demograhpie(PeekB(spiel+3))
-            ;endcase
           Case 15;finanzen
             Window_Finanzen(PeekB(spiel+3))
-            ;endcase
           Case 16;karriere
             Window_Kariere(PeekB(spiel+3))
-            ;endcase
           Case 17;geheimdienst
             Window_Geheimdienst(PeekB(spiel+3))
-            ;endcase
           Case 18;vergleich
             Window_Vergleich(PeekB(spiel+3))
-            ;endcase
           Case 19;rundebeenden
             NextTurn()
-            ;endcase
         EndSelect
         ;}
       Case #PB_Event_Menu

@@ -7,13 +7,13 @@
 Procedure Window_NeuesSpiel()
   window=WinOpen(200,260,"Neues Spiel")
   
-  TextGadget(-1,20,20,160,60,"Bitte die Anzahl der Menschlichen Spieler einstellen:")
-  track1=TrackBarGadget(-1,20,80,140,20,1,10,#PB_TrackBar_Ticks)
-  text1=TextGadget(-1,160,80,60,20,"1")
-  TextGadget(-1,20,120,160,60,"Bitte die Anzahl der gewünschten Computerspieler einstellen:")
-  track2=TrackBarGadget(-1,20,180,140,20,1,9,#PB_TrackBar_Ticks)
-  text2=TextGadget(-1,160,180,60,20,"1")
-  button=ButtonGadget(-1,50,220,100,20,"Weiter")
+  TextGadget(#PB_Any,20,20,160,60,"Bitte die Anzahl der Menschlichen Spieler einstellen:")
+  track1=TrackBarGadget(#PB_Any,20,80,140,20,1,10,#PB_TrackBar_Ticks)
+  text1=TextGadget(#PB_Any,160,80,60,20,"1")
+  TextGadget(#PB_Any,20,120,160,60,"Bitte die Anzahl der gewünschten Computerspieler einstellen:")
+  track2=TrackBarGadget(#PB_Any,20,180,140,20,1,9,#PB_TrackBar_Ticks)
+  text2=TextGadget(#PB_Any,160,180,60,20,"1")
+  button=ButtonGadget(#PB_Any,50,220,100,20,"Weiter")
   
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -22,9 +22,6 @@ Procedure Window_NeuesSpiel()
     EventType=EventType()
     
     Select Event
-      Case #PB_Event_Repaint
-        RePaint(EventWindow())
-        ;endcase
       Case #PB_Event_Gadget
         Select EventGadget
           Case track1
@@ -47,11 +44,9 @@ Procedure Window_NeuesSpiel()
               SetGadgetState(track2,GetGadgetAttribute(track2,#PB_TrackBar_Minimum))
               SetGadgetText(text2,Str(GetGadgetState(track2)))
             EndIf
-            ;endcase
           Case track2
             track=GetGadgetState(track2)
             SetGadgetText(text2,Str(GetGadgetState(track2)))
-            ;endcase
           Case button
             For x=0 To 9
               land(x)\vergeben=0
@@ -86,10 +81,8 @@ Procedure Window_NeuesSpiel()
             
             CloseWindow(window)
             ProcedureReturn 1
-            ;endcase
         EndSelect
         
-        ;endcase
     EndSelect
     
     
@@ -100,19 +93,19 @@ Procedure Window_SetSpielerName(x)
     ;{
     window=WinOpen(200,240,"Spielerdaten")
     
-    TextGadget(-1,20,10,160,20,"Spieler "+Str(x+1))
-    string=StringGadget(-1,20,30,160,20,PeekS(spieler(x)+1,16,#PB_Ascii))
-    TextGadget(-1,20,60,160,20,"Land:")
-    combo=ComboBoxGadget(-1,20,80,160,22)
+    TextGadget(#PB_Any,20,10,160,20,"Spieler "+Str(x+1))
+    string=StringGadget(#PB_Any,20,30,160,20,PeekS(spieler(x)+1,16,#PB_Ascii))
+    TextGadget(#PB_Any,20,60,160,20,"Land:")
+    combo=ComboBoxGadget(#PB_Any,20,80,160,22)
     For y=0 To 9
       If land(y)\vergeben=0
         AddGadgetItem(combo,0,land(y)\name)
       EndIf
     Next
-    FrameGadget(-1,20,120,160,70,"Hormone")
-    option1=OptionGadget(-1,40,140,120,20,"eher männlich")
-    option2=OptionGadget(-1,40,160,120,20,"eher weiblich")
-    button=ButtonGadget(-1,50,200,100,20,"Fertig")
+    FrameGadget(#PB_Any,20,120,160,70,"Hormone")
+    option1=OptionGadget(#PB_Any,40,140,120,20,"eher männlich")
+    option2=OptionGadget(#PB_Any,40,160,120,20,"eher weiblich")
+    button=ButtonGadget(#PB_Any,50,200,100,20,"Fertig")
     SetGadgetState(option1,1)
     SetGadgetState(combo,0)
     Repeat
@@ -136,9 +129,7 @@ Procedure Window_SetSpielerName(x)
               PokeB(spieler(x)+33,GetGadgetState(option2))
               CloseWindow(window)
               ProcedureReturn 1
-              ;endcase
           EndSelect
-          ;endcase
       EndSelect
     ForEver
     ;}
@@ -159,15 +150,15 @@ Procedure Window_Begruesung(spieler)
   PlaySound(sounds(9))
   window=WinOpen(270,250,"Sic transit gloria mundi...")
   
-  TextGadget(-1,20,20,230,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
-  TextGadget(-1,10,50,240,20,"Willkommen im Jahre des Herrn "+Str(PeekW(spiel+1))+",",#PB_Text_Center)
-  TextGadget(-1,20,80,230,20,"Oh Herrlicher!",#PB_Text_Center)
-  TextGadget(-1,20,150,230,20,"Erwartet nun die Berichte Eurer",#PB_Text_Center)
-  TextGadget(-1,20,180,230,20,"Berater, teuerster Herrscher!",#PB_Text_Center)
-  ImageGadget(-1,125-6,100,32,32,ImageID(icon(10)))
-  ImageGadget(-1,20,200,32,32,ImageID(icon(11)))
-  ImageGadget(-1,270-52,200,32,32,ImageID(icon(11)))
-  button=ButtonGadget(-1,85,210,100,20,"Nun gut")
+  TextGadget(#PB_Any,20,20,230,20,titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name,#PB_Text_Center)
+  TextGadget(#PB_Any,10,50,240,20,"Willkommen im Jahre des Herrn "+Str(PeekW(spiel+1))+",",#PB_Text_Center)
+  TextGadget(#PB_Any,20,80,230,20,"Oh Herrlicher!",#PB_Text_Center)
+  TextGadget(#PB_Any,20,150,230,20,"Erwartet nun die Berichte Eurer",#PB_Text_Center)
+  TextGadget(#PB_Any,20,180,230,20,"Berater, teuerster Herrscher!",#PB_Text_Center)
+  ImageGadget(#PB_Any,125-6,100,32,32,ImageID(icon(10)))
+  ImageGadget(#PB_Any,20,200,32,32,ImageID(icon(11)))
+  ImageGadget(#PB_Any,270-52,200,32,32,ImageID(icon(11)))
+  button=ButtonGadget(#PB_Any,85,210,100,20,"Nun gut")
   SetWindowTitle(MainWindow,"Kaiser - "+titel(PeekW(spieler(spieler)+84),PeekB(spieler(spieler)+33))+" "+PeekS(spieler(spieler)+1,16,#PB_Ascii)+" von "+land(PeekB(spieler(spieler)+124))\name)
   Repeat
     Event=WaitWindowEvent(#TimeOut)
@@ -189,8 +180,8 @@ Procedure Window_Begruesung(spieler)
 EndProcedure
 Procedure Window_Hochzeitsgeschenk(spieler)
   window=WinOpen(310,130,"Hochzeitsgeschenke")
-  ImageGadget(-1,20,20,32,32,ImageID(icon(1)))
-  ImageGadget(-1,20,55,32,32,ImageID(icon(2)))
+  ImageGadget(#PB_Any,20,20,32,32,ImageID(icon(1)))
+  ImageGadget(#PB_Any,20,55,32,32,ImageID(icon(2)))
   mem=spieler(spieler)
   ; CHEATING !!!!!
   ; PokeL(mem+21,PeekL(mem+21)+150000)
@@ -209,7 +200,6 @@ Procedure Window_Hochzeitsgeschenk(spieler)
       icon2=24
       PokeL(mem+21,PeekL(mem+21)+1500)
       PokeL(mem+25,PeekL(mem+25)+2000)
-      ;endcase
     Case 1
       text1.s="Ihr heiratet eine schöne Müllerin."
       text2.s="Als Mitgift springen 5000 Last Korn und eine Kornmühle herraus."
@@ -219,7 +209,6 @@ Procedure Window_Hochzeitsgeschenk(spieler)
       PokeL(mem+29,PeekL(mem+29)+5000)
       PokeW(mem+48,PeekW(mem+48)+1)
       PokeL(mem+80,PeekL(mem+80)+2000)
-      ;endcase
     Case 2
       text1.s="Die Hochzeit mit einer feschen Fürstentochter steht ins Haus."
       text2.s="Ihr Vater bezahlt mit 5000 Talern."
@@ -227,7 +216,6 @@ Procedure Window_Hochzeitsgeschenk(spieler)
       icon1=1
       icon2=24
       PokeL(mem+25,PeekL(mem+25)+5000)
-      ;endcase
     Case 3
       text1.s="Ihr haltet Hochzeit mit einer Schönheit aus dem Nachbarort."
       text2.s="Als Mitgift erhaltet Ihr 1000 ha Land sowie 3000 Last Korn."
@@ -236,13 +224,12 @@ Procedure Window_Hochzeitsgeschenk(spieler)
       icon2=2
       PokeL(mem+21,PeekL(mem+21)+1000)
       PokeL(mem+29,PeekL(mem+29)+3000)
-      ;endcase
   EndSelect
-  TextGadget(-1,60,20,200,30,text1)
-  TextGadget(-1,60,60,200,30,text2)
-  button=ButtonGadget(-1,75,100,130,20,text3)
-  ImageGadget(-1,20,20,32,32,ImageID(icon(icon1)))
-  ImageGadget(-1,20,55,32,32,ImageID(icon(icon2)))
+  TextGadget(#PB_Any,60,20,200,30,text1)
+  TextGadget(#PB_Any,60,60,200,30,text2)
+  button=ButtonGadget(#PB_Any,75,100,130,20,text3)
+  ImageGadget(#PB_Any,20,20,32,32,ImageID(icon(icon1)))
+  ImageGadget(#PB_Any,20,55,32,32,ImageID(icon(icon2)))
   Repeat
     Event=WaitWindowEvent(#TimeOut)
     EventMenu=EventMenu()
@@ -264,12 +251,12 @@ EndProcedure
 Procedure Window_Held(spieler)
   window=WinOpen(270,200,"Was für ein Held!")
   
-  ImageGadget(-1,20,20,32,32,ImageID(icon(3)))
-  TextGadget(-1,60,20,190,30,"Ein jungerHeld aus einem fernen Lande bietet Euch seine Dienste an:")
-  TextGadget(-1,20,60,230,70,Chr(34)+"Ewige Treue will ich Euch schwören, mein einziger Lohn soll das Blut Eurer Feinde sein! Bitte verleiht mir einen heldenhaften Namen:"+Chr(34))
-  string=StringGadget(-1,50,140,150,20,"")
-  ImageGadget(-1,20,20,32,32,ImageID(icon(3)))
-  button=ButtonGadget(-1,75,170,100,20,"Fertig")
+  ImageGadget(#PB_Any,20,20,32,32,ImageID(icon(3)))
+  TextGadget(#PB_Any,60,20,190,30,"Ein jungerHeld aus einem fernen Lande bietet Euch seine Dienste an:")
+  TextGadget(#PB_Any,20,60,230,70,Chr(34)+"Ewige Treue will ich Euch schwören, mein einziger Lohn soll das Blut Eurer Feinde sein! Bitte verleiht mir einen heldenhaften Namen:"+Chr(34))
+  string=StringGadget(#PB_Any,50,140,150,20,"")
+  ImageGadget(#PB_Any,20,20,32,32,ImageID(icon(3)))
+  button=ButtonGadget(#PB_Any,75,170,100,20,"Fertig")
   mem=spieler(spieler)
   PokeL(mem+216,7);angriff
   PokeL(mem+220,7);abwehr
@@ -324,12 +311,12 @@ EndProcedure
 Procedure Window_Hexe(spieler)
   window=WinOpen(340,220,"Eine Hexe")
   
-  TextGadget(-1,60,20,260,50,"Eine junge Frau tritt an Euch heran. Sie wirkt recht schlampig mit ihrem roten Haar und dem brennenden Stengel in ihrem Mund.")
-  TextGadget(-1,20,70,300,70,Chr(34)+"Helden sterben und dann kommen neue. Mein Geschenk an Euch soll ewig währen! Ich möchte Euch mit einem nützlichen Zauber belegen. Wählt einen:"+Chr(34))
-  ImageGadget(-1,20,25,32,32,ImageID(icon(12)))
-  ImageGadget(-1,260,130,32,32,ImageID(icon(12)))
-  combo=ComboBoxGadget(-1,20,145,160,22)
-  button=ButtonGadget(-1,220,180,100,20,"Fertig")
+  TextGadget(#PB_Any,60,20,260,50,"Eine junge Frau tritt an Euch heran. Sie wirkt recht schlampig mit ihrem roten Haar und dem brennenden Stengel in ihrem Mund.")
+  TextGadget(#PB_Any,20,70,300,70,Chr(34)+"Helden sterben und dann kommen neue. Mein Geschenk an Euch soll ewig währen! Ich möchte Euch mit einem nützlichen Zauber belegen. Wählt einen:"+Chr(34))
+  ImageGadget(#PB_Any,20,25,32,32,ImageID(icon(12)))
+  ImageGadget(#PB_Any,260,130,32,32,ImageID(icon(12)))
+  combo=ComboBoxGadget(#PB_Any,20,145,160,22)
+  button=ButtonGadget(#PB_Any,220,180,100,20,"Fertig")
   For x=0 To 11
     AddGadgetItem(combo,-1,zauber(x)\zauber)
   Next

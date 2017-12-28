@@ -39,7 +39,7 @@ Structure Struktur_Kriegsvorderung
 EndStructure
 Structure Struktur_Spieler
   menschlich.b
-  name.s{16}
+  name.s{8}
   einwohner.l
   land.l
   taler.l
